@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Rep Report</title>
+    <meta charset="UTF-8">
+    <meta name="google" content="notranslate">
+    <meta http-equiv="Content-Language" content="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="includes/repstyle.css">
+    <!-- <script type='text/javascript'> if(history.replaceState) history.replaceState({}, "", "/rep/"); // show only root url</script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script-->
+    <script src="geolocate.js"></script>
+    <script>
+        history.pushState(null, document.title, location.href);
+        history.back();
+        history.forward();
+        window.onpopstate = function() {
+            history.go(1);
+        };
+    </script>
+</head>
+
+<body lang="en" onload="getLocation()">
+
+    <header>
+        <div class="ib pos-rel"><img class="ib" src="./includes/saclogo02.png" alt="SAC"></div>
+        <div class="ib txt-ctr w100p-32 pos-rel"><img class="ib" src="./includes/repreport.png" alt="SAC"></div>
+    </header>
+    <div class="h40"></div>
