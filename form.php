@@ -1,3 +1,7 @@
+<?php
+
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,35 +9,65 @@
     <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js">
+    </script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
 
+    <style>
+    .radio-inline {
+        position: relative;
+        display: flex;
+        padding-left: 7%;
+        margin-bottom: 0;
+        font-weight: 400;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+
+    .header {
+        padding: 30px;
+        text-align: center;
+        color: black;
+        font-size: 30px;
+    }
+
+    body {
+        background-image: url('assests/img_truck.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        margin: 0px;
+    }
+    </style>
 </head>
-<header>
-    <img src="includes/saclogo.png" alt="saclogo.png">
-
-</header>
 
 <body>
+    <div class="header">
+        <img src="includes/saclogo.png" alt="saclogo.png">
+        <h1><b>Eurol Hunter App</b></h1>
+    </div>
 
-    <div class="container" style="width:50%">
-        <h2>Rep Report</h2>
+    <div class="container" style="width:50%; background-color: white">
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
         </script>
-
-        <form action="" method="get">
+        <form action="" method="POST">
 
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label"><b>Customer</b></label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="name">
+                <input type="text" class="form-control" id="exampleFormControlInput1" name="customer"
+                    placeholder="name">
             </div>
             <hr>
             <label class="form-label"><b>Nr of trucks</b></label>
-            <input type="text" class="form-control" id="exampleForm1" placeholder="Number of trucks">
+            <input type="text" class="form-control" id="exampleForm1" placeholder="Number of trucks" value="">
             <select class="form-select" multiple="multiple" id="exampleForm1" aria-label="Default select example"
-                id="exampleForm">
+                name="ary[]">
                 <option value="Volvo">1-10</option>
                 <option value="Scania">11-30</option>
                 <option value="Mercedes">31-60</option>
@@ -90,31 +124,36 @@
             <hr>
             <label for="radioForm2" class="form-label"><b>Volume of lubricants (per month)</b></label>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"
-                    checked>
-                <label class="form-check-label" for="exampleRadios1">
-                    0-100 L
-                </label>
-                <br>
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                <label class="form-check-label" for="exampleRadios2">
-                    101-1k L
-                </label>
-                <br>
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                <label class="form-check-label" for="exampleRadios2">
-                    1k - 5k L
-                </label>
-                <br>
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                <label class="form-check-label" for="exampleRadios2">
-                    5k - 10k L
-                </label>
-                <br>
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                <label class="form-check-label" for="exampleRadios2">
-                    10k L+
-                </label>
+                <div class="radio-inline">
+                    <label class="radio-inline" for="exampleRadios1">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                            value="option1" checked> 0-100 L
+                    </label>
+                    <br>
+
+                    <label class="radio-inline" for="exampleRadios2">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                            value="option2"> 101-1k L
+                    </label>
+                    <br>
+
+                    <label class="radio-inline" for="exampleRadios3">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3"
+                            value="option3">1k - 5k L
+                    </label>
+                    <br>
+
+                    <label class="radio-inline" for="exampleRadios4">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4"
+                            value="option4"> 5k - 10k L
+                    </label>
+                    <br>
+
+                    <label class="radio-inline" for="exampleRadios5">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios5"
+                            value="option5"> 10k L+
+                    </label>
+                </div>
             </div>
             <hr>
             <div class="mb-3">
@@ -130,60 +169,72 @@
             <hr>
             <label for="radioForm2" class="form-label"><b>Current change intervals</b></label>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"
-                    checked>
-                <label class="form-check-label" for="exampleRadios1">
-                    10k - 20k km
-                </label>
-                <br>
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                <label class="form-check-label" for="exampleRadios2">
-                    20k - 40k km
-                </label>
-                <br>
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                <label class="form-check-label" for="exampleRadios2">
-                    40k - 60k km
-                </label>
-                <br>
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                <label class="form-check-label" for="exampleRadios2">
-                    60k+ km
-                </label>
+                <div class="radio-inline">
+
+                    <label class="radio-inline" for="exampleRadios1">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                            value="option1" checked>10k - 20k km
+                    </label>
+                    <br>
+
+                    <label class="radio-inline" for="exampleRadios2">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                            value="option2"> 20k - 40k km
+                    </label>
+                    <br>
+
+                    <label class="radio-inline" for="exampleRadios3">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                            value="option2">40k - 60k km
+                    </label>
+                    <br>
+
+                    <label class="radio-inline" for="exampleRadios4">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                            value="option2">60k+ km
+                    </label>
+                </div>
             </div>
             <hr>
             <label for="radioForm2" class="form-label"><b>Pack size preference</b></label>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"
-                    checked>
-                <label class="form-check-label" for="exampleRadios1">
-                    1L
-                </label>
-                <br>
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                <label class="form-check-label" for="exampleRadios2">
-                    2L
-                </label>
-                <br>
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                <label class="form-check-label" for="exampleRadios2">
-                    5L
-                </label>
-                <br>
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                <label class="form-check-label" for="exampleRadios2">
-                    25L
-                </label>
-                <br>
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                <label class="form-check-label" for="exampleRadios2">
-                    200L
-                </label>
-                <br>
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                <label class="form-check-label" for="exampleRadios2">
-                    Other
-                </label>
+                <div class="radio-inline">
+
+                    <label class="radio-inline" for="exampleRadios1">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                            value="option1" checked> 1L
+                    </label>
+                    <br>
+
+                    <label class="radio-inline" for="exampleRadios2">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                            value="option2"> 2L
+                    </label>
+                    <br>
+
+                    <label class="radio-inline" for="exampleRadios3">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                            value="option2">5L
+                    </label>
+                    <br>
+
+                    <label class="radio-inline" for="exampleRadios3">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                            value="option2"> 25L
+                    </label>
+                    <br>
+
+                    <label class="radio-inline" for="exampleRadios4">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                            value="option2"> 200L
+                    </label>
+                    <br>
+
+                    <label class="radio-inline" for="exampleRadios5">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                            value="option2"> Other
+                    </label>
+                </div>
             </div>
             <hr>
             <div class="mb-3">
@@ -306,6 +357,8 @@
                 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="custom pack size">
             </div>
             <hr>
+            <input type="submit" name="Submit" value="Save">
+            <input type="reset" value="Cancel">
         </form>
     </div>
 </body>
