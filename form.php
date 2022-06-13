@@ -15,8 +15,37 @@ session_start();
     </script>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
-
+    <link rel="stylesheet" src="/assests/formSheet.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
+    
     <style>
+    /* Media Queries: Tablet Landscape */
+    @media screen and (max-width: 1060px) {
+        #primary {
+            width: 67%;
+        }
+
+        #secondary {
+            width: 30%;
+            margin-left: 3%;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        #primary {
+            width: 100%;
+        }
+
+        #secondary {
+            width: 100%;
+            margin: 0;
+            border: none;
+        }
+    }
+
     .radio-inline {
         position: relative;
         display: flex;
@@ -42,6 +71,16 @@ session_start();
         background-attachment: fixed;
         margin: 0px;
     }
+
+    .container {
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        color: #f1f1f1;
+        width: 100%;
+        height: 100%;
+        padding: 2%;
+        width: 50%;
+    }
     </style>
 </head>
 
@@ -51,41 +90,18 @@ session_start();
         <h1><b>Eurol Hunter App</b></h1>
     </div>
 
-    <div class="container" style="width:50%; background-color: white">
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-        </script>
+    <div class="container">
         <form action="" method="POST">
-
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label"><b>Customer</b></label>
+                <p>Enter Customer Name</p>
                 <input type="text" class="form-control" id="exampleFormControlInput1" name="customer"
                     placeholder="name">
             </div>
             <hr>
-            <label class="form-label"><b>Nr of trucks</b></label>
-            <input type="text" class="form-control" id="exampleForm1" placeholder="Number of trucks" value="">
-            <select class="form-select" multiple="multiple" id="exampleForm1" aria-label="Default select example"
-                name="ary[]">
-                <option value="Volvo">1-10</option>
-                <option value="Scania">11-30</option>
-                <option value="Mercedes">31-60</option>
-                <option value="MAN">61-90</option>
-                <option value="DAF">91-120</option>
-                <option value="BPW">121-200</option>
-                <option value="Henred">201-500</option>
-                <option value="Isuzu MCV">501-1000</option>
-                <option value="Hino">10001+</option>
-            </select>
-            <hr>
-            <label class="form-label"><b>Truck brands</b></label>
-            <script>
 
-            </script>
-            <input type="text" class="form-control" id="exampleForm" placeholder="brands">
-            <select name="options[]" id="edit-states1-id" data-placeholder="Placeholder..." class="form-select multiple"
-                multiple="multiple">
+            <label class="form-label"><b>Truck brands</b></label>
+            <select name = 'subject[]' class="form-select" id="select-trucks-type">
                 <option value=" Volvo">Volvo</option>
                 <option value="Scania">Scania</option>
                 <option value="Mercedes">Mercedes</option>
@@ -101,6 +117,25 @@ session_start();
                 <option value="Nissan">Nissan</option>
                 <option value="Mazda">Mazda</option>
                 <option value="Sprinter">Sprinter</option>
+            </select>
+            <?php
+            // Retrieving each selected option
+            foreach ($_POST['subject'] as $subject){
+                echo "You selected $subject<br/>";
+            }
+            ?>
+            <hr>
+            <label class="form-label"><b>Nr of trucks</b></label>
+            <select class="form-select">
+                <option value="Volvo">1-10</option>
+                <option value="Scania">11-30</option>
+                <option value="Mercedes">31-60</option>
+                <option value="MAN">61-90</option>
+                <option value="DAF">91-120</option>
+                <option value="BPW">121-200</option>
+                <option value="Henred">201-500</option>
+                <option value="Isuzu MCV">501-1000</option>
+                <option value="Hino">10001+</option>
             </select>
             <hr>
             <label class="form-label"><b>Main truck brands</b></label>
