@@ -52,8 +52,11 @@
 
         <meta charset="UTF-8">
         <title>Rep Manager</title>
+
         <meta name="viewport" content="width=device-width,initial-scale=1">
+        
         <link rel="stylesheet" type="text/css" href="/mysac/mysac01.css"> 
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script> 
 <!-- =========================================================================================================================================== -->
 <!--                                                                    STYLE                                                                    -->
@@ -65,14 +68,13 @@
         p   {text-align: center;}
         div {text-align: center;}
 
-        /* Image */
         img 
         {
           display:       block;
           margin-left:   auto;
           margin-right:  auto;        
         }
-        /* BUTTON */
+
         button  
         {
            margin-left:   auto;
@@ -80,10 +82,11 @@
            display:       block;
         }  
 
-        .center {
-                    margin-left: auto;
-                    margin-right: auto;
-                }
+        .center 
+        {
+            margin-left: auto;
+            margin-right: auto;
+        }
 
     </style>
 <!-- =========================================================================================================================================== -->
@@ -99,20 +102,30 @@
             <h2><?php echo "" .$userName. " " .$userSName. " (" .$userBranch. ") " ?></h2>
 
 <!-- =========================================================================================================================================== -->
-<!--                                                          BUTTON                                                                             -->
+<!--                                                                    BUTTON                                                                   -->
 <!-- =========================================================================================================================================== -->
             <!-- BUTTON -->
             <div class="choose_rep_class">
 
-            <!-- LOGOUT -->
-            <form action="https://sacmarketing.co.za/rep/home.php" method="POST">
+            <!-- BACK -->
+            <form action="https://sacmarketing.co.za/rep/" method="POST">
                 <button 
                 type="submit" 
                 name="submit" 
-                value="Plan_Delivery" 
-                style="margin-top: 10px"
-                onclick="GottoPage()"> 
+                value="back" 
+                style="margin-top: 10px"> 
                 &nbsp Back &nbsp
+                </button> 
+            </form>   
+
+            <!-- PLAN WEEK -->
+            <form action="https://sacmarketing.co.za/rep/rep-schedule/home.php" method="POST">
+                <button 
+                type="submit" 
+                name="submit" 
+                value="Plan_week" 
+                style="margin-top: 10px"> 
+                &nbsp Plan Week &nbsp
                 </button> 
             </form>   
 
@@ -120,114 +133,10 @@
 <!-- =========================================================================================================================================== -->
 <!--                                                            REP SCHEDULE TABLE                                                               -->
 <!-- =========================================================================================================================================== -->
-    <div style="overflow:auto; margin-top:50px;">
-
-    <!-- SEARCHES DB FOR SELECTED REP-->
-    <?php 
-
-    // GET CURRENT MONTH TO BE USED IN SELECTING THE REP SCEDULE 
-    $month = date('m'); 
-    $Today = date('d');
-
-    echo $month;
-
-
-    // SELECTS REP CODE BASED ON REP NAME, SURNAME, BRANCH 
-    $res = mysqli_query($link, "SELECT
-                        id         ,
-                        user       ,
-                        name       ,
-                        client_id  ,
-                        client_name,
-                        date       ,
-                        dayname    ,
-                        branch
-                        FROM
-                        rep_schedule
-                        WHERE
-                        name = '".$userName."'
-                        AND branch = '".$userBranch."'
-                        AND substring(date, 6,2) = '".$month."'
-                        ORDER BY date ASC
-                        ");
-
-    if($link->query($res) === true)
-    {       
-        // PROMPTS THE USER WHEN QRY SUC                          
-        //echo "updated Successful";  
-    }                       
-
-    else
-    {
-        // echo("Error description: " . $link -> error);
-        // echo "Failed To write" . mysqli_connect_error();
-    }
-
-                        
-    ?>
-                
-    <!-- TABLE START -->
-    <table id="" style="border:outset;width:350px;" class="center">
-        <thead>
-
-            <!-- COLLUMN HEADERS -->
-            <tr>                
-                <th style="width: 5PX;">Date   </th>
-                <th style="width: 5PX;">Day    </th>
-                <th style="width: 5PX;">Client </th>
-            </tr> 
-
-        </thead>
-                    
-        <?php
-
-            // WHILE THE QRY $RES IS BEING EXECUTED
-            // POPULATE VARS
-            while($row = mysqli_fetch_array($res))
-            {
-                $rowid       = $row["id"          ];
-                $user        = $row["user"        ];
-                $name        = $row["name"        ];
-                $client_id   = $row["client_id"   ];
-                $client_name = $row["client_name" ];
-                $date        = $row["date"        ];
-                $dayname     = $row["dayname"     ];
-                $branch      = $row["branch"      ];     
-                
-                // CHANGES THE DATE VARIABLE TO ONY SHOW DAY
-                $day = substr("$date", 8, -8);
-                $id  = $row['id'];
-
-                echo $date;
-                
-        ?>
-
-        <tbody>
-            <tr>                     
-                <td> <?php echo $day     ;              ?> </td>
-                <td> <?php echo $dayname ;              ?> </td>
-                <td> <?php echo $row    ["client_name"] ?> </td>                
-            </tr>
-        </tbody>
-
-            <?php
-            }
-            
-            ?>
-                
-    </Table> 
-    </div>   
-
 <!-- =========================================================== -->
 <!--                            BODY ENDS                        -->
 <!-- =========================================================== -->     
         </body> 
-<!-- =========================================================================================================================================== -->
-<!--                                                                SCRIPTS                                                                      -->
-<!-- =========================================================================================================================================== -->
-    <script>
-       
-    </script>
 <!-- =========================================================================================================================================== -->
 <!--                                                                DOM ENDS                                                                     -->
 <!-- =========================================================================================================================================== -->

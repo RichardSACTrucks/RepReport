@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 if ( isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST' ){
-    require_once '../../globals/dbcon.inc';
+    require_once '../globals/dbconn.inc';
     
     function updateDB($c,$t,$f,$v){
         global $dbconn;

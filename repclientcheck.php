@@ -1,9 +1,10 @@
 <?php
 session_start();
-
+if ( $rucode === "ts001" ){
 	error_reporting(E_ALL);
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
+}
 
 if ( isset($_SESSION['sacmr']) ){
 
@@ -15,8 +16,8 @@ if ( isset($_SESSION['sacmr']) ){
     //$dir = "/rep";
     $dir = dirname($_SERVER['PHP_SELF']);
 
-    require_once "../../globals/dbconn.inc";
-    // require_once 'includes/log.inc'; // PROVIDES: $userfname, $userlname, $userbranch, $usercode, $userlevel //
+    require_once "../globals/dbconn.inc";
+    require_once 'includes/log.inc'; // PROVIDES: $userfname, $userlname, $userbranch, $usercode, $userlevel //
     //echo "<p>$repnam $repsur ($branch) $ucode</p>";
 
 
@@ -90,7 +91,7 @@ if ( isset($_SESSION['sacmr']) ){
                 header('Location: home.php?status=1&cpyid='.$cpyid);
             }
             else {
-                require_once './includes/html-head.html';
+                require_once 'includes/html-head.html';
                 ?>
                 <section onload="getLocation()">
                     <p><br>Client does not exist. Do you want to create new client?</p>
@@ -162,7 +163,7 @@ if ( isset($_SESSION['sacmr']) ){
                 }
                 </script>
                 <?php
-                require_once './includes/html-foot.html';
+                require_once 'includes/html-foot.html';
             }
             $qry-> close();
         }

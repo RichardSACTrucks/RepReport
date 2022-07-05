@@ -6,7 +6,7 @@
 // =====================================================================================================================================
     session_start();
     //$dir = dirname($_SERVER['PHP_SELF']);
-    $dir = 'https://sacmarketing.co.za/Richard/RepReport/';
+    $dir = 'https://sacmarketing.co.za/rep/';
     $thisfile = htmlspecialchars($_SERVER["PHP_SELF"]);
 // =====================================================================================================================================
 //                                                          USER VALIDATION
@@ -16,7 +16,7 @@
     if ( $_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] == "login")
     {
         // DBCON NON WRITE
-        require '../../globals/dbcon.inc';
+        require '../globals/dbcon.inc';
     
         // TXT BOX TO LOACAL VAR
         $un = trim($_POST['username']);

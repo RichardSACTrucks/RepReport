@@ -5,15 +5,15 @@
 //                                                          IMPORTS INCLUDES
 // ===========================================================================================================================================   
     session_start();
-    $dir = 'https://sacmarketing.co.za/Richard/RepReport';
+    $dir = 'https://sacmarketing.co.za/rep/';
 // ============================================================================================================================================
 //                                                      IF SESSION EMPTY EXIT
 // ============================================================================================================================================
-    // if(empty($_GET['status']))
-    // {
-    //     header("location:$dir/home.php?status=1");
-    //     exit;
-    // }
+    if(empty($_GET['status']))
+    {
+        header("location:$dir/home.php?status=1");
+        exit;
+    }
     
 // ============================================================================================================================================
 //                                                     IF SESSION IS SACMR TRUE
@@ -27,11 +27,11 @@
         // CURRENT TIME
         $timenow = date('Y-m-d H:i:s');
 
-        //  NON WRITE
-        require_once "../../globals/dbcon.inc";
+        // DBCON NON WRITE
+        require_once "../globals/dbcon.inc";
         
         // provides $ucode $userlevel $userbranch
-        // require_once "./includes/log.inc"; 
+        require_once "includes/log.inc"; 
 
 // ============================================================================================================================================
 //                                                     SELECTS THE REPS DETAILS
@@ -74,7 +74,7 @@
 // ============================================================================================================================================
         else if ( isset($_REQUEST['cpyid']) || isset($_REQUEST['company']) )
         {
-            require_once './includes/html-head.html';
+            require_once 'includes/html-head.html';
     ?>
 
             <section>
@@ -279,13 +279,13 @@
                 <input type="hidden" name="cpyid" value="<?php echo $cpyid; ?>">
                 <input type="hidden" name="company" value="<?php echo $compny; ?>">
                 <input type="hidden" name="branch" value="<?php echo $branch; ?>">
-                <button type="submit">Visit</button>
+                <button type="submit">Log New Visit</button>
             </form-->
 
 <!-- ========================================================================================================================================= -->
 <!--                                                        REPORT 5                                                                           -->
 <!-- ========================================================================================================================================= -->
-            <form action     = "repservicecall.php" method="post">
+            <form action     = "repreport-5.php" method="post">
 
                 <input type  = "hidden" name ="cpyid"   value ="<?php echo $cpyid; ?>">
                 <input type  = "hidden" name ="company" value ="<?php echo $compny; ?>">
@@ -299,7 +299,7 @@
 <!-- ========================================================================================================================================= -->
     <?php
             // UCODE 'TS001 IS THE TEST ACCOUNT'
-            if ($ucode == 'rr001')
+            if ($ucode == 'ts001')
             { 
     ?>
                 <!-- REPREPORT -->
@@ -309,7 +309,7 @@
                     <input  type ="hidden" name = "company" value = "<?php echo $compny; ?>">
                     <input  type ="hidden" name = "branch"  value = "<?php echo $branch; ?>">
 
-                    <button type = "submit">Log New Visit 1</button>
+                    <button type = "submit">Log New Visit</button>
                 </form
 
 
@@ -343,6 +343,27 @@
                 </form>
     <?php
             }
+    ?>
+
+<!-- ============================================================================================================================== -->
+<!--                                                        EUROL VISIT                                                             -->
+<!-- ============================================================================================================================== -->
+    <?php
+
+        if ($ucode == 'ak002' OR $ucode == 'kp001')
+        { 
+    ?>
+            <form action = "eurol-visit.php" method = "post">
+
+                <input type = "hidden" name = "cpyid"   value = "<?php echo $cpyid; ?>">
+                <input type = "hidden" name = "company" value = "<?php echo $compny; ?>">
+                <input type = "hidden" name = "branch"  value = "<?php echo $branch; ?>">
+                
+                <button style="background-color:cornflowerblue" type = "submit">EUROL VISIT</button>
+
+            </form>
+    <?php
+        }
     ?>
 <!-- ========================================================================================================================================= -->
 <!--                                                        POSTPONE                                                                           -->
@@ -497,7 +518,7 @@
 
     else 
     {
-        require_once './includes/html-head.html'; 
+        require_once 'includes/html-head.html'; 
     ?>  
 
         <section>
@@ -657,7 +678,7 @@
             </script>
         </section>
     <?php
-        require_once './includes/html-foot.html';
+        require_once 'includes/html-foot.html';
         mysqli_close($dbcon);
     }
     $sql ="";

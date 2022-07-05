@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	$dir = dirname($_SERVER['PHP_SELF']);
-	include '../../globals/dbcon.inc';
+	include '../globals/dbcon.inc';
 	include 'includes/log.inc';
 	//$rid = $_COOKIE['sacmr'];
 	$srid = $_SESSION['sacmr'];

@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 
 if ( isset($_POST['sectin']) && isset($_POST['cmpyid']) && isset($_POST['rucode']) ){
 
-    require '../../globals/dbcon.inc';
+    require '../globals/dbconn.inc';
     $sectin = $dbconn ->real_escape_string($_POST['sectin']);
     $cmpyid = $dbconn ->real_escape_string($_POST['cmpyid']);
     $branch = $dbconn ->real_escape_string($_POST['branch']);

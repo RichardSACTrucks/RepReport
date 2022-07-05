@@ -6,64 +6,48 @@
 session_start();
 
 $dir = dirname($_SERVER['PHP_SELF']);
-include '../../globals/dbcon.inc';
-// include '../includes/log.inc';
+include '../globals/dbcon.inc';
+include 'includes/log.inc';
 
-// if ($_SESSION['sacmbs'])
-// // {
-// //     header("location: $dir/index.php");
-// // }
-// // else 
-// {
-//     $srid = $_SESSION['sacmbs'];
+if ( empty($_SESSION['sacmr']) )
+{
+    header("location: $dir/index.php");
+}
+else 
+{
+    $srid = $_SESSION['sacmr'];
 
-    // $sql = "SELECT ucode,name,branch FROM sacstaff WHERE id=? LIMIT 1;";
-    // $qry = $dbconn ->prepare($sql);
-    // $qry ->bind_param('i',$srid);
-    // $qry ->execute();
-    // $res = $qry ->get_result();
-    // $row = $res ->fetch_assoc();
-    // $rucode = $row['ucode'];
-    // $repnam = $row['name'];
-    // $branch = $row['branch'];
-//     // $qry-> close();
+    $sql = "SELECT ucode,name,branch FROM sacstaff WHERE id=? LIMIT 1;";
+    $qry = $dbconn ->prepare($sql);
+    $qry ->bind_param('i',$srid);
+    $qry ->execute();
+    $res = $qry ->get_result();
+    $row = $res ->fetch_assoc();
+    $rucode = $row['ucode'];
+    $repnam = $row['name'];
+    $branch = $row['branch'];
+    $qry-> close();
 
-//     if (!empty($branch))
-//     // {
-//     //     $_SESSION = array();
-//     //     session_destroy();
-//     //     header("location: $dir/index.php");
-//     //     exit;
-//     // }
-//     // else 
-//     {
-//         require_once 'includes/html-head.html';
+    if ( empty($branch) )
+    {
+        $_SESSION = array();
+        session_destroy();
+        header("location: $dir/index.php");
+        exit;
+    }
+    else 
+    {
+        require_once 'includes/html-head.html';
 
-//             $checksession = $_SESSION['sacmbs'];
-//             //echo "<p><b>session: $checksession</b></p>";
-//             //$branch = $_REQUEST['branch'];
-//             $cpyid = $_REQUEST['cpyid'];
-//             $company = $_REQUEST['company'];
-//             $dist = '';
-//             $contact_posi = null;
+            $checksession = $_SESSION['sacmr'];
+            //echo "<p><b>session: $checksession</b></p>";
+            //$branch = $_REQUEST['branch'];
+            $cpyid = $_REQUEST['cpyid'];
+            $company = $_REQUEST['company'];
+            $dist = '';
+            $contact_posi = null;
             ?>
-<!-- =================================================================================================================================== -->
-<!--                                                         DOC HEAD                                                                    -->
-<!-- =================================================================================================================================== -->
-<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <title>SAC Rep Report</title>
-        <meta charset="UTF-8">
-        <meta name="author" content="Jan van der Westhuizen">
-        <meta name="Edits" content="Kevin Alers">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./includes/repstyle.css">
-    </head>
-<!-- =================================================================================================================================== -->
-<!--                                                           BODY                                                                      -->
-<!-- =================================================================================================================================== -->
-    <body>
+
             <script>var savedcount = 0;</script>
 
             <input type="hidden" id="cmpyid" name="cmpyid" value="<?php echo $cpyid; ?>" >
@@ -78,57 +62,57 @@ include '../../globals/dbcon.inc';
                 <section id="divcpydet">
 
                     <?php
-                        // $checkprevrepsvsts = 0;
-                        // $sql = "SELECT company_name,account_nr,physical_street,physical_town,physical_province,delivery_town,client_rating FROM clients_main WHERE id = ? AND assigned_branch = ? LIMIT 1;";
-                        // $qry = $dbconn ->prepare($sql);
-                        // $qry ->bind_param('is',$cpyid,$branch);
+                        $checkprevrepsvsts = 0;
+                        $sql = "SELECT company_name,account_nr,physical_street,physical_town,physical_province,delivery_town,client_rating FROM clients_main WHERE id = ? AND assigned_branch = ? LIMIT 1;";
+                        $qry = $dbconn ->prepare($sql);
+                        $qry ->bind_param('is',$cpyid,$branch);
 
-                        // if ( $qry ->execute() )
-                        // {
-                        //     $res = $qry ->get_result();
-                        //     if ( $res ->num_rows == 1 )
-                        //     {
-                        //         $row = $res ->fetch_assoc();
-                        //         $company = $row['company_name'];
-                        //         $acnr = $row['account_nr'];
+                        if ( $qry ->execute() )
+                        {
+                            $res = $qry ->get_result();
+                            if ( $res ->num_rows == 1 )
+                            {
+                                $row = $res ->fetch_assoc();
+                                $company = $row['company_name'];
+                                $acnr = $row['account_nr'];
 
-                        //         $pa_street = $row['physical_street'];
-                        //         $pa_town = $row['physical_town'];
-                        //         $pa_prov = $row['physical_province'];
-                        //         $hub_area = $row['delivery_town'];
-                        //         $rating = $row['client_rating'];
+                                $pa_street = $row['physical_street'];
+                                $pa_town = $row['physical_town'];
+                                $pa_prov = $row['physical_province'];
+                                $hub_area = $row['delivery_town'];
+                                $rating = $row['client_rating'];
 
-                        //         $checkprevrepsvsts = 1;
-                        //     }
-                        // }
-                        // // else 
-                        // // {
-                        // //     echo "Error 1: " . mysqli_error($dbconn);
-                        // //     echo "Company details cannot be found.";
-                        // // }
-                        // // $qry ->close();
+                                $checkprevrepsvsts = 1;
+                            }
+                        }
+                        else 
+                        {
+                            echo "Error 1: " . mysqli_error($dbconn);
+                            echo "Company details cannot be found.";
+                        }
+                        $qry ->close();
 
-                        // if ( $checkprevrepsvsts === 1 )
-                        // {
-                        //     $sql = "SELECT count(id) AS amount FROM clients_repvisits WHERE clients_main_id = ? LIMIT 1;";
-                        //     $qry = $dbconn ->prepare($sql);
-                        //     $qry ->bind_param('i',$cpyid);
-                        //     if ( $qry ->execute() )
-                        //     {
-                        //         $res = $qry ->get_result();
-                        //         $row = $res ->fetch_assoc();
-                        //         $num = $row['amount'];
-                        //         if ( $num > 0 )
-                        //         {
-                        //             $previsits = "yes";
-                        //         }
-                        //         else 
-                        //         {
-                        //             $previsits = 0;
-                        //         }
-                        //     }
-                        //     $qry ->close();
-                        // }
+                        if ( $checkprevrepsvsts === 1 )
+                        {
+                            $sql = "SELECT count(id) AS amount FROM clients_repvisits WHERE clients_main_id = ? LIMIT 1;";
+                            $qry = $dbconn ->prepare($sql);
+                            $qry ->bind_param('i',$cpyid);
+                            if ( $qry ->execute() )
+                            {
+                                $res = $qry ->get_result();
+                                $row = $res ->fetch_assoc();
+                                $num = $row['amount'];
+                                if ( $num > 0 )
+                                {
+                                    $previsits = "yes";
+                                }
+                                else 
+                                {
+                                    $previsits = 0;
+                                }
+                            }
+                            $qry ->close();
+                        }
                     ?>
 
                     <form id="comdet">
@@ -173,7 +157,7 @@ include '../../globals/dbcon.inc';
 
                     </form>
 
-                    <!-- <script>
+                    <script>
                         var comgood = 0;
                         $(function() {
                             $( "#hubare" ).keypress().autocomplete({
@@ -221,7 +205,7 @@ include '../../globals/dbcon.inc';
                                         comdet = 1;
                                         $('#cmpydets').css('background-color','#009100');
                                         $('#resComDet').html('<i>'+showRes+'</i>');
-                                        // $('#divcpydet').hide();
+                                        $('#divcpydet').hide();
                                         comgood = 1;
                                         checkcompleteness();
                                     }
@@ -240,7 +224,7 @@ include '../../globals/dbcon.inc';
                             });
                             return false;
                         });
-                    </script> -->
+                    </script>
 
                     <div class="h32"></div>
 
@@ -270,7 +254,7 @@ include '../../globals/dbcon.inc';
                                 echo '<option value="createnewcontact" >+ Create New Contact</option>';
                                 echo '</select>';
                             }
-                            
+                            else {
                                 ?>
                                 <div id="newcontact">
                                     <label>Contact Name:*</label>
@@ -299,7 +283,10 @@ include '../../globals/dbcon.inc';
                                     <input type="checkbox" id="markp0" name="markp0" value="NONE"><label for="s0"> None</label>
 
                                 </div>
-                          
+                                <?php
+                            }
+                            $qry ->close();
+                        ?>
 
                         <div id="clientContactDetails"></div>
 
@@ -308,7 +295,7 @@ include '../../globals/dbcon.inc';
                         <div id="resConDet" style="width:100%;text-align:center;margin:8px auto">You need to save to approve this information.</div>
 
                     </form>
-<!-- 
+
                     <script>
                         var congood = 0;
                         var savedcontac = null;
@@ -328,12 +315,12 @@ include '../../globals/dbcon.inc';
                             });
                             return false;
 
-                            // if (i=="createnewcontact") {
-                            //     $('#newcontact').show();
-                            // }
-                            // else {
-                            //     $('#newcontact').hide();
-                            // }
+                            if (i=="createnewcontact") {
+                                $('#newcontact').show();
+                            }
+                            else {
+                                $('#newcontact').hide();
+                            }
                         });
 
                         function showNewContact(){
@@ -404,7 +391,7 @@ include '../../globals/dbcon.inc';
                                         comdet = 1;
                                         $('#contdets').css('background-color','#009100');
                                         $('#resConDet').html('<i>'+rejson.result+'</i>');
-                                        // $('#divcondet').hide();
+                                        $('#divcondet').hide();
                                         congood = 1;
                                         checkcompleteness();
                                     }
@@ -423,7 +410,7 @@ include '../../globals/dbcon.inc';
                             });
                             return false;
                         });
-                    </script> -->
+                    </script>
 
                     <div class="h32"></div>
 
@@ -507,7 +494,7 @@ include '../../globals/dbcon.inc';
 
                     </form>
 
-                    <!-- <script>
+                    <script>
                         var vehgood = 0;
                         var $lastsave = $('form#vehicl'), origForm = $lastsave.serialize();
 
@@ -561,7 +548,7 @@ include '../../globals/dbcon.inc';
                                         comdet = 1;
                                         $('#vehicles').css('background-color','#009100');
                                         $('#resFleVeh').html('<i>'+showRes+'</i>');
-                                        // $('#divfleveh').hide();
+                                        $('#divfleveh').hide();
                                         vehgood = 1;
                                         checkcompleteness();
                                     }
@@ -580,7 +567,7 @@ include '../../globals/dbcon.inc';
                             });
                             return false;
                         });
-                    </script> -->
+                    </script>
 
                 </section>
 
@@ -641,7 +628,7 @@ include '../../globals/dbcon.inc';
 
                     </form>
                 
-                    <!-- <script>
+                    <script>
                         var visgood = 0;
                         var vistim = '<?php echo date('Y-m-d H:i:s'); ?>';
                         var $lastsave = $('form#visnot'), origForm = $lastsave.serialize();
@@ -688,7 +675,7 @@ include '../../globals/dbcon.inc';
                                         if ( showRes === 'Saved' ){
                                             $('#visinote').css('background-color','#009100');
                                             $('#resVisNot').html('<i>'+showRes+'</i>');
-                                            // $('#divvisnot').hide();
+                                            $('#divvisnot').hide();
                                             visgood = 1;
                                             checkcompleteness();
                                         }
@@ -711,12 +698,12 @@ include '../../globals/dbcon.inc';
                         });
 
                         $('#requote').click(function(){
-                            // $('#requote').hide();
+                            $('#requote').hide();
                             $('#shquote').show();
                             $("#doquote").load("repquote.php");
                         });
                         $('#shquote').click(function(){
-                            // $('#shquote').hide();
+                            $('#shquote').hide();
                             $('#requote').show();
                             $("#doquote").load("empty.php");
                         });
@@ -724,7 +711,7 @@ include '../../globals/dbcon.inc';
                         function doQuote(){
                             $("#doquote").load("repquote.php");
                         }
-                    </script> -->
+                    </script>
 
                 </section>
 
@@ -810,7 +797,7 @@ include '../../globals/dbcon.inc';
 
                     </form>
 
-                    <!-- <script>
+                    <script>
                         
                         var locgood = 0;
                         var $lastsave = $('form#locdet'), origForm = $lastsave.serialize();
@@ -866,7 +853,7 @@ include '../../globals/dbcon.inc';
                                         comdet = 1;
                                         $('#locadeta').css('background-color','#009100');
                                         $('#resLocDet').html('<i>'+showRes+'</i>');
-                                        // $('#divlocdet').hide();
+                                        $('#divlocdet').hide();
                                         locgood = 1;
                                         checkcompleteness();                                     
                                        
@@ -890,7 +877,7 @@ include '../../globals/dbcon.inc';
                             });
                             return false;
                         });
-                    </script> -->
+                    </script>
 
                 </section>
 
@@ -959,7 +946,7 @@ include '../../globals/dbcon.inc';
 
             </div>
 
-            <!-- <script>
+            <script>
                 var replat;// = position.coords.latitude;
                 var replon;// = position.coords.longitude;
                 var gpsAccu;
@@ -1010,33 +997,33 @@ include '../../globals/dbcon.inc';
                         jsdistsh.value = dist ;
                         //jsdistsh.value = mainlat+"/"+mainlon+"/"+replat+"/"+replon;
 
-                        // if ( d < 1.00 )
-                        // { 
-                        //     // 10m & 1km
-                        //     $('#forcoordupd').show();
-                        //     //document.getElementById("forcoordupd").innerHTML = 'Use Client\'s Main Coordinates?*<br><input type="radio" id="tomaincoords" name="tomaincoords" value="yes" checked> Yes &emsp; <input type="radio" name="tomaincoords" value="no" required > No<br>';
-                        // }
-                        // if ( d > 0.20 )
-                        // { 
-                        //     // 200m
-                        //     if ( gpsAccu <= 50 )
-                        //     {
-                        //         $('#setthisasmaincoord').show();
-                        //         $('#setmaincoordreqacc').hide();
-                        //         //document.getElementById("setmaincoord").innerHTML = '<p>Set This As Client\'s Main Coordinates?*<br><input type="radio" id="newcpyloc" name="newcpyloc" value="yes"> Yes &emsp; <input type="radio" name="newcpyloc" value="no" required checked> No</p>';
-                        //     }
-                        //     else 
-                        //     {
-                        //         $('#setthisasmaincoord').hide();
-                        //         $('#setmaincoordreqacc').show();
-                        //         //document.getElementById("setmaincoord").innerHTML = 'setmaincoordreqacc<p>Set This As Client\'s Main Coordinates?*<br>(Require 50m Accuracy)</p>';
-                        //     }
-                        // }
-                        // else 
-                        // {
-                        //     $('#setthisasmaincoord').hide();
-                        //     $('#setmaincoordreqacc').hide();
-                        // }
+                        if ( d < 1.00 )
+                        { 
+                            // 10m & 1km
+                            $('#forcoordupd').show();
+                            //document.getElementById("forcoordupd").innerHTML = 'Use Client\'s Main Coordinates?*<br><input type="radio" id="tomaincoords" name="tomaincoords" value="yes" checked> Yes &emsp; <input type="radio" name="tomaincoords" value="no" required > No<br>';
+                        }
+                        if ( d > 0.20 )
+                        { 
+                            // 200m
+                            if ( gpsAccu <= 50 )
+                            {
+                                $('#setthisasmaincoord').show();
+                                $('#setmaincoordreqacc').hide();
+                                //document.getElementById("setmaincoord").innerHTML = '<p>Set This As Client\'s Main Coordinates?*<br><input type="radio" id="newcpyloc" name="newcpyloc" value="yes"> Yes &emsp; <input type="radio" name="newcpyloc" value="no" required checked> No</p>';
+                            }
+                            else 
+                            {
+                                $('#setthisasmaincoord').hide();
+                                $('#setmaincoordreqacc').show();
+                                //document.getElementById("setmaincoord").innerHTML = 'setmaincoordreqacc<p>Set This As Client\'s Main Coordinates?*<br>(Require 50m Accuracy)</p>';
+                            }
+                        }
+                        else 
+                        {
+                            $('#setthisasmaincoord').hide();
+                            $('#setmaincoordreqacc').hide();
+                        }
                         $('#submitarea').show();
                     //}
                     // https://developer.mozilla.org/en-US/docs/Web/API/GeolocationCoordinates
@@ -1063,44 +1050,44 @@ include '../../globals/dbcon.inc';
                     return Value * Math.PI / 180;
                 }
 
-                // $('#cmpydets').click(function(){
-                //     $('#divcpydet').toggle();
-                //     $('#divcondet').hide();
-                //     $('#divfleveh').hide();
-                //     $('#divvisnot').hide();
-                //     $('#divlocdet').hide();
-                // });
-                // $('#contdets').click(function(){
-                //     $('#divcpydet').hide();
-                //     $('#divcondet').toggle();
-                //     $('#divfleveh').hide();
-                //     $('#divvisnot').hide();
-                //     $('#divlocdet').hide();
-                // });
-                // $('#vehicles').click(function(){
-                //     $('#divcpydet').hide();
-                //     $('#divcondet').hide();
-                //     $('#divfleveh').toggle();
-                //     $('#divvisnot').hide();
-                //     $('#divlocdet').hide();
-                // });
-                // $('#visinote').click(function(){
-                //     $('#divcpydet').hide();
-                //     $('#divcondet').hide();
-                //     $('#divfleveh').hide();
-                //     $('#divvisnot').toggle();
-                //     $('#divlocdet').hide();
-                // });
-                // $('#locadeta').click(function(){
-                //     $('#divcpydet').hide();
-                //     $('#divcondet').hide();
-                //     $('#divfleveh').hide();
-                //     $('#divvisnot').hide();
-                //     $('#divlocdet').toggle();
-                // });
-                // $('#prevvisi').click(function(){
-                //     $('#divprevis').toggle();
-                // });
+                $('#cmpydets').click(function(){
+                    $('#divcpydet').toggle();
+                    $('#divcondet').hide();
+                    $('#divfleveh').hide();
+                    $('#divvisnot').hide();
+                    $('#divlocdet').hide();
+                });
+                $('#contdets').click(function(){
+                    $('#divcpydet').hide();
+                    $('#divcondet').toggle();
+                    $('#divfleveh').hide();
+                    $('#divvisnot').hide();
+                    $('#divlocdet').hide();
+                });
+                $('#vehicles').click(function(){
+                    $('#divcpydet').hide();
+                    $('#divcondet').hide();
+                    $('#divfleveh').toggle();
+                    $('#divvisnot').hide();
+                    $('#divlocdet').hide();
+                });
+                $('#visinote').click(function(){
+                    $('#divcpydet').hide();
+                    $('#divcondet').hide();
+                    $('#divfleveh').hide();
+                    $('#divvisnot').toggle();
+                    $('#divlocdet').hide();
+                });
+                $('#locadeta').click(function(){
+                    $('#divcpydet').hide();
+                    $('#divcondet').hide();
+                    $('#divfleveh').hide();
+                    $('#divvisnot').hide();
+                    $('#divlocdet').toggle();
+                });
+                $('#prevvisi').click(function(){
+                    $('#divprevis').toggle();
+                });
                 function checkcompleteness()
                 {
                     
@@ -1115,11 +1102,11 @@ include '../../globals/dbcon.inc';
                         $('#allowSubmit').hide();
                     }
                 }
-            </script> -->
+            </script>
         
         </body>
         </html>
         <?php
-//     }
-// }
+    }
+}
 ?>

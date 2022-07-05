@@ -28,7 +28,7 @@ set_error_handler('error_mailer');
 ini_set('memory_limit', '1024M');
 //*/
 
-if ( $rucode === "rr001" ){
+if ( $rucode === "ts001" ){
 	error_reporting(E_ALL);
 	ini_set('display_errors', 0);
 	ini_set('display_startup_errors', 0);
@@ -36,7 +36,7 @@ if ( $rucode === "rr001" ){
 //*/
 
 $dir = dirname($_SERVER['PHP_SELF']);
-include '../../globals/dbcon.inc';
+include '../globals/dbcon.inc';
 $srid = $_SESSION['sacmr'];
 $stmt = $dbcon->prepare("SELECT name,branch FROM sacstaff WHERE id = ? LIMIT 1;");
 $stmt->bind_param("i",$srid);

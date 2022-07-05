@@ -5,7 +5,7 @@
 // ==================================================================================================================
     session_start();
     $dir = dirname($_SERVER['PHP_SELF']);
-    include '../../globals/dbcon.inc';
+    include '../globals/dbcon.inc';
     //$rid = $_COOKIE['sacmr'];
     $srid = $_SESSION['sacmr'];
 // ==================================================================================================================
@@ -45,7 +45,7 @@
     }
     else 
     {
-    	require_once './includes/html-head.html';
+    	require_once 'includes/html-head.html';
     	?>
     		<?php
     		$checksession = $_SESSION['sacmr'];
