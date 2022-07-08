@@ -20,7 +20,7 @@
 // =====================================================================================================================================
 //                                                          IMPORTS INCLUDES
 // =====================================================================================================================================
-    session_start();
+    
     //$dir = dirname($_SERVER['PHP_SELF']);
     // $dir = 'https://sacmarketing.co.za/rep/';
     // $thisfile = htmlspecialchars($_SERVER["PHP_SELF"]);
@@ -206,14 +206,12 @@
                 <div class="mb-3">
 
                     <label for="exampleFormControlInput1" class="form-label"><b>Customer</b></label>
-                    <p>Enter Customer Name</p>
-
-                    <input type="text" class="form-control" id="exampleFormControlInput1" name="customer" placeholder="Client Name"/>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="customer" value="<?php echo $customerName; ?>"/>
                 </div>
                 <hr>
 <!-- TRUCK BRANDS -->
                 <label class="form-label"><b>Truck Brands</b></label>
-                <select name='trucks[]' class="form-select" id="dropdownlist">
+                <select name='trucks[]' class="form-select" id="dropdownlist" value="<?php echo $truckList ?>">
                     <option value=" Volvo"   >Volvo </option>
                     <option value="Scania"   >Scania      </option>
                     <option value="Mercedes" >Mercedes    </option>
@@ -275,7 +273,7 @@
 <!-- NUMBER OF TRUCK -->
                 <hr>
                 <label class="form-label"><b>Number Of Trucks</b></label>
-                <select class="form-select" name='num_of_trucks'>
+                <select class="form-select" name='num_of_trucks[]' >
                     <option value="1-10"     >1     -10  </option>
                     <option value="11-30"    >11    -30  </option>
                     <option value="31-60"    >31    -60  </option>
@@ -294,31 +292,31 @@
                     <div class="radio-inline">
 
                         <label class="radio-inline" for="volumeRadios1">
-                            <input class="form-check-input" type="radio" name="luberadio" id="volumeRadios1"
+                            <input class="form-check-input" type="radio" name="luberadio[]" id="volumeRadios1"
                                 value="0-100 L" checked> 0-100 L
                         </label>
                         <br>
 
                         <label class="radio-inline" for="volumeRadios2">
-                            <input class="form-check-input" type="radio" name="luberadio" id="volumeRadios2"
+                            <input class="form-check-input" type="radio" name="luberadio[]" id="volumeRadios2"
                                 value="101-1k L"> 101-1k L
                         </label>
                         <br>
 
                         <label class="radio-inline" for="volumeRadios3">
-                            <input class="form-check-input" type="radio" name="luberadio" id="volumeRadios3"
+                            <input class="form-check-input" type="radio" name="luberadio[]" id="volumeRadios3"
                                 value="1k - 5k L">1k - 5k L
                         </label>
                         <br>
 
                         <label class="radio-inline" for="volumeRadios4">
-                            <input class="form-check-input" type="radio" name="luberadio" id="volumeRadios4"
+                            <input class="form-check-input" type="radio" name="luberadio[]" id="volumeRadios4"
                                 value="5k - 10k L"> 5k - 10k L
                         </label>
                         <br>
 
                         <label class="radio-inline" for="volumeRadios5">
-                            <input class="form-check-input" type="radio" name="luberadio" id="volumeRadios5"
+                            <input class="form-check-input" type="radio" name="luberadio[]" id="volumeRadios5"
                                 value="10k L+"> 10k L+
                         </label>
                         
@@ -328,7 +326,8 @@
                 <hr>
                 <input type="file" accept="images/*" capture="camera" name="files[]" multiple="multiple">
                     <hr>
-                <input type="submit" name="Submit" value="Save">
+                <input type="submit" name="Submit" class="close" onClick='window.self.close()' value="Save">
+                <hr>
             </form>
             <hr>
         </div>
@@ -358,5 +357,9 @@ coll[i].addEventListener("click", function() {
    function decrement() {
       document.getElementById('demoInput').stepDown();
    }
+   
+   $('.close').click(function(){
+    window.self.close();
+});
 </script>
 <!--<button onclick="increment()">+</button> <button onclick="decrement()">-</button><input id=demoInput type=number> -->

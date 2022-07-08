@@ -200,137 +200,21 @@
 
         <div class="container">
             <form action="eurol-visit.php" method="post" name="eurolOil">
-            <div class="mb-3">
-                    <label for="Grease" class="form-label"><b>Engine Oil Brand Names</b></label>
-                    <textarea name='engine-brand' class="form-control" id="grease" rows="3"></textarea>
-                </div>
-<!-- LUBRICANTS BRAND NAMES -->
                 <hr>
                 <div class="mb-3">
-                    <label for="lubricant" class="form-label"><b>Coolant Brand Names</b></label>
+                    <label for="lubricant" class="form-label"><b>Owner Information</b></label>
                     <textarea name='coolant-brand' class="form-control" id="coolant" rows="3"></textarea>
                 </div>
                 <hr>
                 <div class="mb-3">
-                    <label for="lubricant" class="form-label"><b>Gearbox and Drivetrain Brand Names</b></label>
+                    <label for="lubricant" class="form-label"><b>Manager Information</b></label>
                     <textarea name='gearbox-brand' class="form-control" id="gearbox" rows="3"></textarea>
                 </div>
                 <hr>
                 <div class="mb-3">
-                    <label for="lubricant" class="form-label"><b>Grease Brand Names</b></label>
+                    <label for="lubricant" class="form-label"><b>Mechanic Information</b></label>
                     <textarea name='grease-brand' class="form-control" id="grease" rows="3"></textarea>
                 </div>
-                <hr>
-                <div class="mb-3">
-                    <label for="lubricant" class="form-label"><b>Hydralics Brand Names</b></label>
-                    <textarea name='hydralics-brand' class="form-control" id="hydralics" rows="3"></textarea>
-                </div>
-                <hr>
-                <button style="margin-top: 10PX;" type="button" class="collapsible">Other Pack Size</button>
-                    <div class="content">
-                        <div id="hider" class="mb-3">
-                                <label id="hider" for="exampleFormControlInput1" class="form-label"><b>Other pack size preference</b></label>
-                                <input name='otherpack' id="hider" type="text" class="form-control" id="exampleFormControlInput1"
-                                    placeholder="custom pack size">
-                        </div>
-                </div>
-                <hr>
-                <!-- PACK SIZE -->
-                <label for="radioForm2" class="form-label"><b>Pack Size Preference</b></label>
-                <div class="form-check">
-                    <div class="radio-inline">
-
-                        <label class="radio-inline" for="sizeRadios1">
-                            <input class="form-check-input" type="radio" name="packradio" id="sizeRadios1"
-                                value="1L" checked> 1L
-                        </label>
-                        <br>
-
-                        <label class="radio-inline" for="sizeRadios2">
-                            <input class="form-check-input" type="radio" name="packradio" id="sizeRadios2"
-                                value="2L"> 2L
-                        </label>
-                        <br>
-
-                        <label class="radio-inline" for="sizeRadios3">
-                            <input class="form-check-input" type="radio" name="packradio" id="sizeRadios3"
-                                value="5L">5L
-                        </label>
-                        <br>
-
-                        <label class="radio-inline" for="sizeRadios3">
-                            <input class="form-check-input" type="radio" name="packradio" id="sizeRadios3"
-                                value="25L"> 25L
-                        </label>
-                        <br>
-
-                        <label class="radio-inline" for="sizeRadios4">
-                            <input class="form-check-input" type="radio" name="packradio" id="sizeRadios4"
-                                value="200L"> 200L
-                        </label>
-                        <br>
-
-                        </div>
-                </div>
-                <!-- CHANGE INTERVALS -->
-                <hr>
-                <label for="radioForm2" class="form-label"><b>Current Change Intervals</b></label>
-                <div class="form-check">
-                    <div class="radio-inline">
-
-                        <label class="radio-inline" for="changeRadios1">
-                            <input class="form-check-input" type="radio" name="changeinterval" id="exampleRadios1"
-                                value="10k-20k km" checked>10k - 20k km
-                        </label>
-                        <br>
-                        <label class="radio-inline" for="changeRadios2">
-                            <input class="form-check-input" type="radio" name="changeinterval" id="changeRadios2"
-                                value="20k-40k km">20k - 40k km
-                        </label>
-                        <br>
-
-                        <label class="radio-inline" for="changeRadios3">
-                            <input class="form-check-input" type="radio" name="changeinterval" id="changeRadios3"
-                                value="40k-60k km">40k - 60k km
-                        </label>
-                        <br>
-
-                        <label class="radio-inline" for="changeRadios4">
-                            <input class="form-check-input" type="radio" name="changeinterval" id="changeRadios4"
-                                value="60k+ km">60k+ km
-                        </label>
-                    </div>
-                </div>
-                <hr>
-
-<!-- OTHER PACK RADIO -->
-
-                <button style="margin-top: 10PX;" type="button" class="collapsible">Other Pack Size</button>
-                    <div class="content">
-                        <div id="hider" class="mb-3">
-                                <label id="hider" for="exampleFormControlInput1" class="form-label"><b>Other pack size preference</b></label>
-                                <input name='otherpack' id="hider" type="text" class="form-control" id="exampleFormControlInput1"
-                                    placeholder="custom pack size">
-                        </div>
-                </div>
-                <!-- CONTRACT -->
-                <hr>
-                <label for="contract" class="form-label"><b>Contract?</b></label>
-
-                <button style="margin-top: 10PX;" type="button" class="collapsible">Yes/No</button>
-                    <div class="content">
-                    <hr>
-                        <div class="mb-3 OEM">
-                            <label for="exampleFormControlInput1" class="form-label"><b>Contract Description?</b></label>
-                            <input name='maintenance' type="text" class="form-control" id="OEM exampleFormControlInput1"
-                                placeholder="Which OEM brand?">
-                        </div>
-                    <hr>
-                        <div class="mb-3">
-                            <label for="startDate"><b>Contract end date</b></label>
-                            <input name='contract' id="startDate" class="form-control" type="date" />
-                        </div>
-                    </div>
                 <hr>
                 <input type="submit" name="Submit" class="close" onClick='window.self.close()' value="Save">
                 <hr>

@@ -236,7 +236,8 @@
                       echo "</tr>";
                     
                       echo "</table>";
-                echo "</form>";
+
+                    echo "</form>";
                
             }
 // =============================================================================================================================================
@@ -245,97 +246,8 @@
                 ?>
                 <hr>
                  <button href="eurol-oil-form.php" target="_blank" type="submit" onclick="NewTab('eurol-oil-form.php')">Lubricants Details</button>
-<!-- CHANGE INTERVALS -->
-                <hr>
-                <label for="radioForm2" class="form-label"><b>Current Change Intervals</b></label>
-                <div class="form-check">
-                    <div class="radio-inline">
 
-                        <label class="radio-inline" for="changeRadios1">
-                            <input class="form-check-input" type="radio" name="changeinterval" id="exampleRadios1"
-                                value="10k-20k km" checked>10k - 20k km
-                        </label>
-                        <br>
-                        <label class="radio-inline" for="changeRadios2">
-                            <input class="form-check-input" type="radio" name="changeinterval" id="changeRadios2"
-                                value="20k-40k km">20k - 40k km
-                        </label>
-                        <br>
 
-                        <label class="radio-inline" for="changeRadios3">
-                            <input class="form-check-input" type="radio" name="changeinterval" id="changeRadios3"
-                                value="40k-60k km">40k - 60k km
-                        </label>
-                        <br>
-
-                        <label class="radio-inline" for="changeRadios4">
-                            <input class="form-check-input" type="radio" name="changeinterval" id="changeRadios4"
-                                value="60k+ km">60k+ km
-                        </label>
-                    </div>
-                </div>
-                <hr>
-
-<!-- PACK SIZE -->
-                <label for="radioForm2" class="form-label"><b>Pack Size Preference</b></label>
-                <div class="form-check">
-                    <div class="radio-inline">
-
-                        <label class="radio-inline" for="sizeRadios1">
-                            <input class="form-check-input" type="radio" name="packradio" id="sizeRadios1"
-                                value="1L" checked> 1L
-                        </label>
-                        <br>
-
-                        <label class="radio-inline" for="sizeRadios2">
-                            <input class="form-check-input" type="radio" name="packradio" id="sizeRadios2"
-                                value="2L"> 2L
-                        </label>
-                        <br>
-
-                        <label class="radio-inline" for="sizeRadios3">
-                            <input class="form-check-input" type="radio" name="packradio" id="sizeRadios3"
-                                value="5L">5L
-                        </label>
-                        <br>
-
-                        <label class="radio-inline" for="sizeRadios3">
-                            <input class="form-check-input" type="radio" name="packradio" id="sizeRadios3"
-                                value="25L"> 25L
-                        </label>
-                        <br>
-
-                        <label class="radio-inline" for="sizeRadios4">
-                            <input class="form-check-input" type="radio" name="packradio" id="sizeRadios4"
-                                value="200L"> 200L
-                        </label>
-                        <br>
-
-                        </div>
-                </div>
-<!-- OTHER PACK RADIO -->
-
-                <button style="margin-top: 10PX;" type="button" class="collapsible">Other Pack Size</button>
-                    <div class="content">
-                        <div id="hider" class="mb-3">
-                                <label id="hider" for="exampleFormControlInput1" class="form-label"><b>Other pack size preference</b></label>
-                                <input name='otherpack' id="hider" type="text" class="form-control" id="exampleFormControlInput1"
-                                    placeholder="custom pack size">
-                        </div>
-                </div>
-<!-- CONTRACT -->
-                <hr>
-                <label for="contract" class="form-label"><b>Contract?</b></label>
-
-                <button style="margin-top: 10PX;" type="button" class="collapsible">Yes/No</button>
-                    <div class="content">
-                    <hr>
-                        <div class="mb-3">
-                            <label for="startDate"><b>Contract end date</b></label>
-                            <input name='contract' id="startDate" class="form-control" type="date" />
-                        </div>
-
-                    </div>
 <!-- DISPENSE TYPE -->
                 <hr>
                 <div class="mb-3">
@@ -352,26 +264,19 @@
                     <div class="content">
                         <hr>
                         <div class="mb-3 OEM">
-                            <label for="exampleFormControlInput1" class="form-label"><b>Which OEM brand?</b></label>
+                            <label for="exampleFormControlInput1" class="form-label"><b>Which Contractor?</b></label>
                             <input name='maintenance' type="text" class="form-control" id="OEM exampleFormControlInput1"
                                 placeholder="Which OEM brand?">
                         </div>
-
+                        <hr>
+                        <div class="mb-3">
+                            <label for="startDate"><b>Date End For Contract</b></label>
+                            <input name='contract' id="startDate" class="form-control" type="date" />
+                        </div>
                     </div>
 <!-- OWNER -->
                 <hr>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label"><b>Owner Name</b></label>
-                    <input name='owner' type="text" class="form-control" id="Owner exampleFormControlInput1"
-                        placeholder="Owner Name">
-                </div>
-<!-- CONTACT NAME -->
-                <hr>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label"><b>Contact Name</b></label>
-                    <input name='contact_name'type="text" class="form-control" id="contactName exampleFormControlInput1"
-                        placeholder="Contact Name">
-                </div>
+                <button href="eurol-client-form.php" target="_blank" type="submit" onclick="NewTab('eurol-owner-form.php')">Client Contact Information</button>  
 <!-- ACTIONS TAKEN -->
                 <hr>
                 <label for="exampleFormControlInput1" class="form-label"><b>Actions Taken</b></label>
