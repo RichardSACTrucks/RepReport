@@ -7,20 +7,18 @@
     *   Project ID:
     *
     *   ==========  =========== ============================================
-    
+
     *************************************************************************/
     // Initiat Session/s - $_SESSION
     session_start();
 
     // Include Assets - Database Connection Master
     require '../../globals/dbcon.inc';
-
-
     /************************************************************************/
 // =====================================================================================================================================
 //                                                          IMPORTS INCLUDES
 // =====================================================================================================================================
-    
+    session_start();
     //$dir = dirname($_SERVER['PHP_SELF']);
     // $dir = 'https://sacmarketing.co.za/rep/';
     // $thisfile = htmlspecialchars($_SERVER["PHP_SELF"]);
@@ -200,136 +198,64 @@
     <body>
 
         <div class="header">
-            <h1 id="hdclient"><b>Eurol Clients</b></h1>
+            <h1 id="hddispensing"><b>Eurol Dispensing Lubricants</b></h1>
         </div>
 
         <div class="container">
-            <form action="eurol-visit.php" method="post" name="eurolClient">
-<!-- TRUCK BRANDS -->
-                <label class="form-label"><b>Truck Brands</b></label>
-                <select name='trucks[]' class="form-select" id="dropdownlist" value="<?php echo $truckList ?>">
-                    <option value=" Volvo"   >Volvo </option>
-                    <option value="Scania"   >Scania      </option>
-                    <option value="Mercedes" >Mercedes    </option>
-                    <option value="MAN"      >MAN         </option>
-                    <option value="DAF"      >DAF         </option>
-                    <option value="BPW"      >BPW         </option>
-                    <option value="Henred"   >Henred      </option>
-                    <option value="Isuzu MCV">Isuzu    MCV</option>
-                    <option value="Hino"     >Hino        </option>
-                    <option value="UD"       >UD          </option>
-                    <option value="Toyota"   >Toyota      </option>
-                    <option value="Ford"     >Ford        </option>
-                    <option value="Nissan"   >Nissan      </option>
-                    <option value="Mazda"    >Mazda       </option>
-                    <option value="Sprinter" >Sprinter    </option>
-                    <option value="Sprinter" >Renault     </option>
-                    <option value="Sprinter" >Iveco       </option>
-                    <option value="Sprinter" >FAW         </option>
-                </select>
-
-                <div id="result" ></div>
-                <script>
-                    $("#dropdownlist").change(function (event) {{
-                        var selected = $(this).find(":selected");
-                        var tmp = selected.val();   
-                    $('#result').text(tmp);
-                        }
-                    });
-                </script>
-
-                <?php
-                    if(!empty($EurolClient)){
-               
-                    echo "<div class='container'>";
-                    echo "<table border='1'>
-
-                    <tr>
-                    
-                    <th>Eurol Client</th>
-
-                    <th>Amount</th>
-
-                    </tr>";
-                    
-                      echo "<tr>";
-                    
-                      echo "<td>" . $EurolClient . "</td>";
-
-                      echo "<tb><button onclick='increment()'>+</button> <button onclick='decrement()'>-</button><input id=demoInput type=number></tb>";
-
-                      echo "</tr>";
-                    
-                      echo "</table>";
-                    
-                      echo "</div>";
-            }
-            ?>
-                
-<!-- NUMBER OF TRUCK -->
+            <form action="eurol-visit.php" method="post" name="eurolDispense">
+                <!-- DISPENSE TYPE -->
                 <hr>
-                <label class="form-label"><b>Number Of Trucks</b></label>
-                <select class="form-select" name='num_of_trucks[]' >
-                    <option value="1-10"     >1     -10  </option>
-                    <option value="11-30"    >11    -30  </option>
-                    <option value="31-60"    >31    -60  </option>
-                    <option value="61-90"    >61    -90  </option>
-                    <option value="91-120"   >91    -120 </option>
-                    <option value="121-200"  >121   -200 </option>
-                    <option value="201-500"  >201   -500 </option>
-                    <option value="501-1000" >501   -1000</option>
-                    <option value="10001+"   >10001+     </option>
-                </select>
-                <hr>
-                <label for="radioForm2" class="form-label"><b>Volume Of Lubricants (Per Month)</b></label>
-
-                <div class="form-check">
-
-                    <div class="radio-inline">
-
-                        <label class="radio-inline" for="volumeRadios1">
-                            <input class="form-check-input" type="radio" name="luberadio[]" id="volumeRadios1"
-                                value="0-100 L" checked> 0-100 L
-                        </label>
-                        <br>
-
-                        <label class="radio-inline" for="volumeRadios2">
-                            <input class="form-check-input" type="radio" name="luberadio[]" id="volumeRadios2"
-                                value="101-1k L"> 101-1k L
-                        </label>
-                        <br>
-
-                        <label class="radio-inline" for="volumeRadios3">
-                            <input class="form-check-input" type="radio" name="luberadio[]" id="volumeRadios3"
-                                value="1k - 5k L">1k - 5k L
-                        </label>
-                        <br>
-
-                        <label class="radio-inline" for="volumeRadios4">
-                            <input class="form-check-input" type="radio" name="luberadio[]" id="volumeRadios4"
-                                value="5k - 10k L"> 5k - 10k L
-                        </label>
-                        <br>
-
-                        <label class="radio-inline" for="volumeRadios5">
-                            <input class="form-check-input" type="radio" name="luberadio[]" id="volumeRadios5"
-                                value="10k L+"> 10k L+
-                        </label>
-                        
-                    </div>
-
+                <div class="mb-3">
+                    <label for="dispensing" class="form-label"><b>Lubrication Dispensing Type</b></label>
+                    <input name="lubrication_dispensing_type" type="text" class="form-control" id="dispensing"
+                        placeholder="Dispensing Type">
                 </div>
+                <!-- CONTRACT -->
                 <hr>
-                <input type="file" accept="images/*" capture="camera" name="files[]" multiple="multiple">
+                <label for="contract" class="form-label"><b>Contract?</b></label>
+
+                <button style="margin-top: 10PX;" type="button" class="collapsible">Yes/No</button>
+                    <div class="content">
                     <hr>
+                        <div class="mb-3 OEM">
+                            <label for="exampleFormControlInput1" class="form-label"><b>Contract Description?</b></label>
+                            <input name='maintenance' type="text" class="form-control" id="OEM exampleFormControlInput1"
+                                placeholder="Contract Description?">
+                        </div>
+                    <hr>
+                        <div class="mb-3">
+                            <label for="startDate"><b>Contract end date</b></label>
+                            <input name='contract' id="startDate" class="form-control" type="date" />
+                        </div>
+                    </div>
+                    <hr>
+                <label for="exampleFormControlInput1" class="form-label"><b>Maintenance Plan?</b></label>
+
+                <button style="margin-top: 10PX;" type="button" class="collapsible">Yes/No</button>
+                    <div class="content">
+                        <hr>
+                        <div class="mb-3 OEM">
+                            <label for="exampleFormControlInput1" class="form-label"><b>Which Contractor?</b></label>
+                            <input name='maintenance' type="text" class="form-control" id="OEM exampleFormControlInput1"
+                                placeholder="Which Contractor?">
+                        </div>
+                        <hr>
+                        <div class="mb-3">
+                            <label for="startDate"><b>Date End For Contract</b></label>
+                            <input name='contract' id="startDate" class="form-control" type="date" />
+                        </div>
+                    </div>
+                <hr>
                 <input type="submit" name="Submit" class="close" onClick='window.self.close()' value="Save">
                 <hr>
             </form>
-            <hr>
         </div>
-    </body>
-    </html>
-        <script>
+</body>
+</html>
+
+
+
+<script>
 
 var coll = document.getElementsByClassName("collapsible");
 var i;
@@ -345,17 +271,9 @@ coll[i].addEventListener("click", function() {
     }
 });
 }
-</script>
- <script>
-   function increment() {
-      document.getElementById('demoInput').stepUp();
-   }
-   function decrement() {
-      document.getElementById('demoInput').stepDown();
-   }
-   
-   $('.close').click(function(){
+
+
+$('.close').click(function(){
     window.self.close();
 });
 </script>
-<!--<button onclick="increment()">+</button> <button onclick="decrement()">-</button><input id=demoInput type=number> -->

@@ -5,47 +5,47 @@
 
 session_start();
 
-$dir = dirname($_SERVER['PHP_SELF']);
-include '../globals/dbcon.inc';
-include 'includes/log.inc';
+// $dir = dirname($_SERVER['PHP_SELF']);
+// include '../../cssglobals/dbcon.inc';
+// // include '../includes/log.inc';
 
-if ( empty($_SESSION['sacmr']) )
-{
-    header("location: $dir/index.php");
-}
-else 
-{
-    $srid = $_SESSION['sacmr'];
+// if ( empty($_SESSION['sacmr']) )
+// {
+//     header("location: $dir/index.php");
+// }
+// else 
+// {
+//     $srid = $_SESSION['sacmr'];
 
-    $sql = "SELECT ucode,name,branch FROM sacstaff WHERE id=? LIMIT 1;";
-    $qry = $dbconn ->prepare($sql);
-    $qry ->bind_param('i',$srid);
-    $qry ->execute();
-    $res = $qry ->get_result();
-    $row = $res ->fetch_assoc();
-    $rucode = $row['ucode'];
-    $repnam = $row['name'];
-    $branch = $row['branch'];
-    $qry-> close();
+//     $sql = "SELECT ucode,name,branch FROM sacstaff WHERE id=? LIMIT 1;";
+//     $qry = $dbconn ->prepare($sql);
+//     $qry ->bind_param('i',$srid);
+//     $qry ->execute();
+//     $res = $qry ->get_result();
+//     $row = $res ->fetch_assoc();
+//     $rucode = $row['ucode'];
+//     $repnam = $row['name'];
+//     $branch = $row['branch'];
+//     $qry-> close();
 
-    if ( empty($branch) )
-    {
-        $_SESSION = array();
-        session_destroy();
-        header("location: $dir/index.php");
-        exit;
-    }
-    else 
-    {
-        require_once 'includes/html-head.html';
+//     if ( empty($branch) )
+//     {
+//         $_SESSION = array();
+//         session_destroy();
+//         header("location: $dir/index.php");
+//         exit;
+//     }
+//     else 
+//     {
+//         // require_once '../includes/html-head.html';
 
-            $checksession = $_SESSION['sacmr'];
-            //echo "<p><b>session: $checksession</b></p>";
-            //$branch = $_REQUEST['branch'];
-            $cpyid = $_REQUEST['cpyid'];
-            $company = $_REQUEST['company'];
-            $dist = '';
-            $contact_posi = null;
+//             $checksession = $_SESSION['sacmr'];
+//             //echo "<p><b>session: $checksession</b></p>";
+//             //$branch = $_REQUEST['branch'];
+//             $cpyid = $_REQUEST['cpyid'];
+//             $company = $_REQUEST['company'];
+//             $dist = '';
+//             $contact_posi = null;
             ?>
 
             <script>var savedcount = 0;</script>
@@ -55,69 +55,8 @@ else
             <input type="hidden" id="rucode" name="rucode" value="<?php echo $rucode; ?>" >
 
             <div>
-
-                <section><h3><?php if ( isset($acnr) && !empty($acnr) ){ echo "$company <br><i>Account Nr: $acnr</i>"; } else { echo $company; } ?></h3></section>
-
-                <h2 id="cmpydets">COMPANY DETAILS</h2>
-                <section id="divcpydet">
-
-                    <?php
-                        $checkprevrepsvsts = 0;
-                        $sql = "SELECT company_name,account_nr,physical_street,physical_town,physical_province,delivery_town,client_rating FROM clients_main WHERE id = ? AND assigned_branch = ? LIMIT 1;";
-                        $qry = $dbconn ->prepare($sql);
-                        $qry ->bind_param('is',$cpyid,$branch);
-
-                        if ( $qry ->execute() )
-                        {
-                            $res = $qry ->get_result();
-                            if ( $res ->num_rows == 1 )
-                            {
-                                $row = $res ->fetch_assoc();
-                                $company = $row['company_name'];
-                                $acnr = $row['account_nr'];
-
-                                $pa_street = $row['physical_street'];
-                                $pa_town = $row['physical_town'];
-                                $pa_prov = $row['physical_province'];
-                                $hub_area = $row['delivery_town'];
-                                $rating = $row['client_rating'];
-
-                                $checkprevrepsvsts = 1;
-                            }
-                        }
-                        else 
-                        {
-                            echo "Error 1: " . mysqli_error($dbconn);
-                            echo "Company details cannot be found.";
-                        }
-                        $qry ->close();
-
-                        if ( $checkprevrepsvsts === 1 )
-                        {
-                            $sql = "SELECT count(id) AS amount FROM clients_repvisits WHERE clients_main_id = ? LIMIT 1;";
-                            $qry = $dbconn ->prepare($sql);
-                            $qry ->bind_param('i',$cpyid);
-                            if ( $qry ->execute() )
-                            {
-                                $res = $qry ->get_result();
-                                $row = $res ->fetch_assoc();
-                                $num = $row['amount'];
-                                if ( $num > 0 )
-                                {
-                                    $previsits = "yes";
-                                }
-                                else 
-                                {
-                                    $previsits = 0;
-                                }
-                            }
-                            $qry ->close();
-                        }
-                    ?>
-
-                    <form id="comdet">
                 
-                        <input type="hidden" name="compni" <?php if( !empty($company) ){ echo 'value="'.$company.'"'; } ?> autocomplete="off" autocapitalize=off required ></p>
+                        <!-- <input type="hidden" name="compni" <?php if( !empty($company) ){ echo 'value="'.$company.'"'; } ?> autocomplete="off" autocapitalize=off required ></p> -->
 
                         <label>Physical Province:*</label>
                         <select id="provin" name="provin" required>
@@ -232,30 +171,8 @@ else
 
                 <h2 id="contdets">CONTACT DETAILS</h2>
                 <section id="divcondet" style="display:none">
-
                     <form id="condet">
 
-                        <?php 
-                            $sql = "SELECT id,contact_name,contact_position FROM clients_contacts WHERE clients_main_id=?;";
-                            $qry = $dbconn ->prepare($sql);
-                            $qry ->bind_param("i",$cpyid);
-                            $qry ->execute();
-                            $res = $qry ->get_result();
-                            if ( $res ->num_rows > 0 ){
-                                echo '<label>Select Contact:*</label>';
-                                echo '<select id="contactSelect" name="contac" required>';
-                                echo '<option value="" disabled selected>-- Select --</option>';
-                                while ( $row = $res ->fetch_assoc() ){
-                                    $contactid = $row['id'];
-                                    $contact_name = $row['contact_name'];
-                                    $contact_posi =  strtoupper($row['contact_position']);
-                                    echo '<option value="'.$contactid.'" >'.$contact_name.' ('.$contact_posi.')</option>';
-                                }
-                                echo '<option value="createnewcontact" >+ Create New Contact</option>';
-                                echo '</select>';
-                            }
-                            else {
-                                ?>
                                 <div id="newcontact">
                                     <label>Contact Name:*</label>
                                     <input id="newcontac" name="newcontac" type="text" placeholder="Clients Name" required>
@@ -283,10 +200,6 @@ else
                                     <input type="checkbox" id="markp0" name="markp0" value="NONE"><label for="s0"> None</label>
 
                                 </div>
-                                <?php
-                            }
-                            $qry ->close();
-                        ?>
 
                         <div id="clientContactDetails"></div>
 
@@ -1090,8 +1003,6 @@ else
                 });
                 function checkcompleteness()
                 {
-                    
-
                     //window.alert(comgood+","+congood+","+vehgood+","+visgood+","+locgood);
                     if ( comgood == 1 && congood == 1 && vehgood == 1 && visgood == 1 && locgood == 1 )
                     {
@@ -1107,6 +1018,6 @@ else
         </body>
         </html>
         <?php
-    }
-}
+//     }
+// }
 ?>

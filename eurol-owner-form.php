@@ -186,6 +186,9 @@
             overflow: hidden;
             background-color: #f1f1f1;
         }
+        input{
+            width: 100%;
+        }
         </style>
     </head>
 
@@ -195,7 +198,7 @@
     <body>
 
         <div class="header">
-            <h1><b>Eurol Lubricants</b></h1>
+            <h1 id="owner"><b>Eurol Owners</b></h1>
         </div>
 
         <div class="container">
@@ -203,17 +206,17 @@
                 <hr>
                 <div class="mb-3">
                     <label for="lubricant" class="form-label"><b>Owner Information</b></label>
-                    <textarea name='coolant-brand' class="form-control" id="coolant" rows="3"></textarea>
+                    <textarea name='Owner-brand' class="form-control" id="Owner" rows="3"></textarea>
                 </div>
                 <hr>
                 <div class="mb-3">
                     <label for="lubricant" class="form-label"><b>Manager Information</b></label>
-                    <textarea name='gearbox-brand' class="form-control" id="gearbox" rows="3"></textarea>
+                    <textarea name='Manager-brand' class="form-control" id="Manager" rows="3"></textarea>
                 </div>
                 <hr>
                 <div class="mb-3">
                     <label for="lubricant" class="form-label"><b>Mechanic Information</b></label>
-                    <textarea name='grease-brand' class="form-control" id="grease" rows="3"></textarea>
+                    <textarea name='Mechanic-brand' class="form-control" id="Mechanic" rows="3"></textarea>
                 </div>
                 <hr>
                 <input type="submit" name="Submit" class="close" onClick='window.self.close()' value="Save">

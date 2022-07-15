@@ -186,6 +186,9 @@
             overflow: hidden;
             background-color: #f1f1f1;
         }
+        input{
+            width: 100%;
+        }
         </style>
     </head>
 
@@ -195,13 +198,13 @@
     <body>
 
         <div class="header">
-            <h1><b>Eurol Lubricants</b></h1>
+            <h1 id="hdoil"><b>Eurol Lubricants</b></h1>
         </div>
 
         <div class="container">
             <form action="eurol-visit.php" method="post" name="eurolOil">
             <div class="mb-3">
-                    <label for="Grease" class="form-label"><b>Engine Oil Brand Names</b></label>
+                    <label for="lubricant" class="form-label"><b>Engine Oil Brand Names</b></label>
                     <textarea name='engine-brand' class="form-control" id="grease" rows="3"></textarea>
                 </div>
 <!-- LUBRICANTS BRAND NAMES -->
@@ -225,21 +228,12 @@
                     <label for="lubricant" class="form-label"><b>Hydralics Brand Names</b></label>
                     <textarea name='hydralics-brand' class="form-control" id="hydralics" rows="3"></textarea>
                 </div>
-                <hr>
-                <button style="margin-top: 10PX;" type="button" class="collapsible">Other Pack Size</button>
-                    <div class="content">
-                        <div id="hider" class="mb-3">
-                                <label id="hider" for="exampleFormControlInput1" class="form-label"><b>Other pack size preference</b></label>
-                                <input name='otherpack' id="hider" type="text" class="form-control" id="exampleFormControlInput1"
-                                    placeholder="custom pack size">
-                        </div>
-                </div>
+
                 <hr>
                 <!-- PACK SIZE -->
                 <label for="radioForm2" class="form-label"><b>Pack Size Preference</b></label>
                 <div class="form-check">
                     <div class="radio-inline">
-
                         <label class="radio-inline" for="sizeRadios1">
                             <input class="form-check-input" type="radio" name="packradio" id="sizeRadios1"
                                 value="1L" checked> 1L
@@ -272,6 +266,15 @@
 
                         </div>
                 </div>
+                <hr>
+                <button style="margin-top: 10PX;" type="button" class="collapsible">Other Pack Size</button>
+                    <div class="content">
+                        <div id="hider" class="mb-3">
+                                <label id="hider" for="exampleFormControlInput1" class="form-label"><b>Other pack size preference</b></label>
+                                <input name='otherpack' id="hider" type="text" class="form-control" id="exampleFormControlInput1"
+                                    placeholder="custom pack size">
+                        </div>
+                </div>
                 <!-- CHANGE INTERVALS -->
                 <hr>
                 <label for="radioForm2" class="form-label"><b>Current Change Intervals</b></label>
@@ -302,37 +305,7 @@
                     </div>
                 </div>
                 <hr>
-
-<!-- OTHER PACK RADIO -->
-
-                <button style="margin-top: 10PX;" type="button" class="collapsible">Other Pack Size</button>
-                    <div class="content">
-                        <div id="hider" class="mb-3">
-                                <label id="hider" for="exampleFormControlInput1" class="form-label"><b>Other pack size preference</b></label>
-                                <input name='otherpack' id="hider" type="text" class="form-control" id="exampleFormControlInput1"
-                                    placeholder="custom pack size">
-                        </div>
-                </div>
-                <!-- CONTRACT -->
-                <hr>
-                <label for="contract" class="form-label"><b>Contract?</b></label>
-
-                <button style="margin-top: 10PX;" type="button" class="collapsible">Yes/No</button>
-                    <div class="content">
-                    <hr>
-                        <div class="mb-3 OEM">
-                            <label for="exampleFormControlInput1" class="form-label"><b>Contract Description?</b></label>
-                            <input name='maintenance' type="text" class="form-control" id="OEM exampleFormControlInput1"
-                                placeholder="Which OEM brand?">
-                        </div>
-                    <hr>
-                        <div class="mb-3">
-                            <label for="startDate"><b>Contract end date</b></label>
-                            <input name='contract' id="startDate" class="form-control" type="date" />
-                        </div>
-                    </div>
-                <hr>
-                <input type="submit" name="Submit" class="close" onClick='window.self.close()' value="Save">
+                <input type="submit" name="Submit" class="close" value="Save">
                 <hr>
             </form>
         </div>
@@ -358,8 +331,12 @@ coll[i].addEventListener("click", function() {
 });
 }
 
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+    if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+        window.self.close();
+    }
+}
 
-$('.close').click(function(){
-    window.self.close();
-});
+
 </script>
