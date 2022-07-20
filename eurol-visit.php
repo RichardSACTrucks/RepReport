@@ -150,7 +150,29 @@
                 width: auto !important;
             }
         }
+        #overlay {
+            position: fixed;
+            display: none;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2;
+            cursor: pointer;
+        }
 
+        #text{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 50px;
+            color: white;
+            transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+        }
 
         .radio-inline 
         {
@@ -249,9 +271,52 @@
             <img src="includes/eurol-logo.png" alt="eurol-logo.png">
             <h1><b>Eurol Hunter App</b></h1>
         </div>
+        <div id="overlay">
+        <div class="container" >
+        <form action="" method="POST">
+<div class="form-check">
+<div class="mb-3">
+                    <label for="lubricant" class="form-label"><b>Comment</b></label>
+                    <textarea name='comments' class="form-control" id="grease" rows="3"></textarea>
+                </div>
+<input name='actionradio' class="form-check-input" type="checkbox" value="Quote provided" id="ActionsDefault1">
+<label class="form-check-label" for="ActionsDefault1">
+Quote provided
+</label>
+
+<br>
+<input name='actionradio' class="form-check-input" type="checkbox" value="Catalogue provided" id="ActionsDefault1">
+<label class="form-check-label" for="ActionsDefault1">
+Catalogue provided
+</label>
+
+<br>
+<input name='actionradio' class="form-check-input" type="checkbox" value="Sale made" id="ActionsDefault1">
+<label class="form-check-label" for="ActionsDefault1">
+Sale made
+</label>
+
+<br>
+<input name='actionradio' class="form-check-input" type="checkbox" value="Brochure provided" id="ActionsDefault1">
+<label class="form-check-label" for="ActionsDefault1">
+Brochure provided
+</label>
+
+<br>
+<input name='actionradio' class="form-check-input" type="checkbox" value="None" id="ActionsDefault1">
+<label class="form-check-label" for="ActionsDefault1">
+None
+</label>
+<hr>
+                <input type="submit" name="Submit" onclick="off()" value="reviewed">
+</div>
+    </div>
+    </form>
+</div>
+
         <div class="container">
-<button type="button" class="owner" id="owner"><h1 id="owner">Eurol Clients</h1></button>
-<section id="divclient">
+<button type="button" class="owner" id="owner" onclick="myFunction('divclient')"><h1 id="owner">Eurol Clients</h1></button>
+<div id="divclient" style="display: none;">
             <form action="" method="post">
 <!-- TRUCK BRANDS -->
 <?php
@@ -278,20 +343,6 @@
                         <p><input type="number" id="vehm71" name="vehm71" value="<?php vehQty($cpyid,"71"); ?>" min="0" max="9999" maxlength="4" size="4"> Mazda</p>
                         <p><input type="number" id="vehm11" name="vehm11" value="<?php vehQty($cpyid,"11"); ?>" min="0" max="9999" maxlength="4" size="4"> Sprinter</p>
                 <div id="result" ></div>
-<!-- NUMBER OF TRUCK -->
-                <hr>
-                <label class="form-label"><b>Number Of Trucks</b></label>
-                <select class="form-select" name='num_of_trucks[]' >
-                    <option value="1-10"     >1     -10  </option>
-                    <option value="11-30"    >11    -30  </option>
-                    <option value="31-60"    >31    -60  </option>
-                    <option value="61-90"    >61    -90  </option>
-                    <option value="91-120"   >91    -120 </option>
-                    <option value="121-200"  >121   -200 </option>
-                    <option value="201-500"  >201   -500 </option>
-                    <option value="501-1000" >501   -1000</option>
-                    <option value="10001+"   >10001+     </option>
-                </select>
                 <hr>
                 <label for="radioForm2" class="form-label"><b>Volume Of Lubricants (Per Month)</b></label>
 
@@ -337,35 +388,65 @@
                 <input type="submit" name="Submit" class="close" onClick='window.self.close()' value="Save">
                 <hr>
             <hr>
-</section>
-<button type="button" class="hdoil" id="hdoil"><h1 id="hdoil">Eurol Lubricants</h1></button>
-<section id="divoil">
+</div>
+<button type="button" class="hdoil" id="hdoil" onclick="myFunction('divoil')"><h1 id="hdoil">Eurol Lubricants</h1></button>
+<div id="divoil" style="display: none;">
             <div class="mb-3">
                     <label for="lubricant" class="form-label"><b>Engine Oil Brand Names</b></label>
-                    <textarea name='engine-brand' class="form-control" id="grease" rows="3"></textarea>
+                    <input list="browsers" name='engine-brand[]' class="form-control" id="grease" rows="3">
                 </div>
 <!-- LUBRICANTS BRAND NAMES -->
                 <hr>
                 <div class="mb-3">
                     <label for="lubricant" class="form-label"><b>Coolant Brand Names</b></label>
-                    <textarea name='coolant-brand' class="form-control" id="coolant" rows="3"></textarea>
+                    <input list="browsers" name='coolant-brand[]' class="form-control" id="coolant" rows="3">
                 </div>
                 <hr>
                 <div class="mb-3">
                     <label for="lubricant" class="form-label"><b>Gearbox and Drivetrain Brand Names</b></label>
-                    <textarea name='gearbox-brand' class="form-control" id="gearbox" rows="3"></textarea>
+                    <input list="browsers" name='gearbox-brand[]' class="form-control" id="gearbox" rows="3">
                 </div>
                 <hr>
                 <div class="mb-3">
                     <label for="lubricant" class="form-label"><b>Grease Brand Names</b></label>
-                    <textarea name='grease-brand' class="form-control" id="grease" rows="3"></textarea>
+                    <input list="browsers" name='grease-brand[]' class="form-control" id="grease" rows="3">
                 </div>
                 <hr>
                 <div class="mb-3">
                     <label for="lubricant" class="form-label"><b>Hydralics Brand Names</b></label>
-                    <textarea name='hydralics-brand' class="form-control" id="hydralics" rows="3"></textarea>
+                    <input list="browsers" name='hydralics-brand[]' class="form-control" id="hydralics" rows="3">
                 </div>
-
+                <datalist id="browsers">
+                    <option value="Fuchs">
+                    <option value="Castrol">
+                    <option value="Caltex">
+                    <option value="Shell">
+                    <option value="Castrol">
+                    <option value="Total">
+                    <option value="Petronas">
+                    <option value="Engen">
+                    <option value="Sasol">
+                    <option value="Volvo">
+                    <option value="Mercedes Benz">
+                    <option value="Q8">
+                    <option value="Motul">
+                    <option value="Elf">
+                    <option value="Valvoline">
+                    <option value="Liquimoly">
+                    <option value="Addinol">
+                    <option value="Petromark">
+                    <option value="Wolf">
+                    <option value="C.I.M">
+                    <option value="Viscol">
+                    <option value="BPW">
+                    <option value="Evron">
+                    <option value="Fuelex Oil">
+                    <option value="Indy Oil">
+                    <option value="Puma">
+                    <option value="Desamark">
+                    <option value="KZN Oils">
+                    <option value="Spanjaard">
+                </datalist>
                 <hr>
                 <!-- PACK SIZE -->
                 <label for="radioForm2" class="form-label"><b>Pack Size Preference</b></label>
@@ -444,30 +525,36 @@
                 <hr>
                 <input type="submit" name="Submit" class="close" value="Save">
                 <hr>
-</section>
-<button type="button" class="hdclient" id="hdclient"><h1 id="hdclient">Eurol Owners</h1></button>
-<section id="divowner">
+</div>
+<button type="button" class="hdclient" id="hdclient" onclick="myFunction('divowner')"><h1 id="hdclient">Eurol Owners</h1></button>
+<div id="divowner" style="display: none;">
                 <hr>
                 <div class="mb-3">
                     <label for="lubricant" class="form-label"><b>Owner Information</b></label>
-                    <textarea name='Owner-brand' class="form-control" id="Owner" rows="3"></textarea>
+                    <input name='Owner-brand' class="form-control" id="Owner" rows="3" placeholder="Name">
+                    <input type="number" name='Owner-brand' class="form-control" id="Owner" rows="3" placeholder="Cell Number">
+                    <input name='Owner-brand' class="form-control" id="Owner" rows="3" placeholder="Email">
                 </div>
                 <hr>
                 <div class="mb-3">
                     <label for="lubricant" class="form-label"><b>Manager Information</b></label>
-                    <textarea name='Manager-brand' class="form-control" id="Manager" rows="3"></textarea>
+                    <input name='Manager-brand' class="form-control" id="Manager" rows="3" placeholder="Name">
+                    <input type="number" name='Manager-brand' class="form-control" id="Manager" rows="3" placeholder="Cell Number">
+                    <input name='Manager-brand' class="form-control" id="Manager" rows="3" placeholder="Email">
                 </div>
                 <hr>
                 <div class="mb-3">
                     <label for="lubricant" class="form-label"><b>Mechanic Information</b></label>
-                    <textarea name='Mechanic-brand' class="form-control" id="Mechanic" rows="3"></textarea>
+                    <input name='Mechanic-brand' class="form-control" id="Mechanic" rows="3" placeholder="Name">
+                    <input type="number" name='Mechanic-brand' class="form-control" id="Mechanic" rows="3" placeholder="Cell Number">
+                    <input name='Mechanic-brand' class="form-control" id="Mechanic" rows="3" placeholder="Email">
                 </div>
                 <hr>
                 <input type="submit" name="Submit" class="close" onClick='window.self.close()' value="Save">
                 <hr>
-</section>
-<button type="button" class="hddispensing" id="hddispensing"><h1 id="hddispensing">Eurol Dispensing Lubricants</h1></button>
-<section id="divdispensing">
+</div>
+<button type="button" class="hddispensing" id="hddispensing" onclick="myFunction('divdispensing')"><h1 id="hddispensing">Eurol Dispensing Lubricants</h1></button>
+<div id="divdispensing" style="display: none;">
                 <!-- DISPENSE TYPE -->
                 <hr>
                 <div class="mb-3">
@@ -513,57 +600,13 @@
                 <hr>
                 <input type="submit" name="Submit" class="close" onClick='window.self.close()' value="Save">
                 <hr>
-</section>
+</div>
  <!-- ACTIONS TAKEN -->
                 <hr>
-                <label for="exampleFormControlInput1" class="form-label"><b>Actions Taken</b></label>
-
                 <div class="form-check">
-                    <input name='actionradio' class="form-check-input" type="checkbox" value="Quote provided" id="ActionsDefault1">
-                    <label class="form-check-label" for="ActionsDefault1">
-                        Quote provided
-                    </label>
-
-                    <br>
-                    <input name='actionradio' class="form-check-input" type="checkbox" value="Catalogue provided" id="ActionsDefault1">
-                    <label class="form-check-label" for="ActionsDefault1">
-                        Catalogue provided
-                    </label>
-
-                    <br>
-                    <input name='actionradio' class="form-check-input" type="checkbox" value="Sale made" id="ActionsDefault1">
-                    <label class="form-check-label" for="ActionsDefault1">
-                        Sale made
-                    </label>
-
-                    <br>
-                    <input name='actionradio' class="form-check-input" type="checkbox" value="Brochure provided" id="ActionsDefault1">
-                    <label class="form-check-label" for="ActionsDefault1">
-                        Brochure provided
-                    </label>
-
-                    <br>
-                    <input name='actionradio' class="form-check-input" type="checkbox" value="None" id="ActionsDefault1">
-                    <label class="form-check-label" for="ActionsDefault1">
-                        None
-                    </label>
+                    <button type="button" onclick="on()">Client Review</button>
                 </div>
 
-<!-- SEND ME A RESPONSE -->
-                <hr>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="responsesCheckDefault">
-                    <label class="form-check-label" for="responsesCheckDefault">
-                        Send me a copy of my responses
-                    </label>
-                </div>
-<!-- EMAIL -->
-                <hr>
-                <div class="mb-3">
-                    <label for="EmailForm" class="form-label"><b>Email address</b></label>
-                    <input type="text" class="form-control" id="EmailForm"
-                        placeholder="Your Email Address">
-                </div>
 <!-- SAVE BTN -->
                 <hr>
                 <input type="submit" name="Submit" value="Save">
@@ -592,55 +635,23 @@
 <!--                                                        SCRIPT                                                                -->
 <!-- ============================================================================================================================ -->
 <script type="text/javascript">
-                // $(document).on("click", '.hdclient', function(){
-                //     $('#divclient').toggle();
-                //     $('#divoil').hide();
-                //     $('#divowner').hide();
-                //     $('#divdispensing').hide();
-                // })
-                // $(document).on("click", '.hdoil', function(){
-                //     $('#divclient').hide();
-                //     $('#divoil').toggle();
-                //     $('#divowner').hide();
-                //     $('#divdispensing').hide();
-                // })
-                // $(document).on("click", '.hdowner', function(){
-                //     $('#divclient').hide();
-                //     $('#divoil').hide();
-                //     $('#divowner').toggle();
-                //     $('#divdispensing').hide();
-                // })
-                // $(document).on("click", '.hddispensing', function(){
-                //     $('#divclient').hide();
-                //     $('#divoil').hide();
-                //     $('#divowner').hide();
-                //     $('#divdispensing').toggle();
-                // })
-                $('.hdclient').click(function(){
-                    $('#divclient').toggle();
-                    $('#divoil').hide();
-                    $('#divowner').hide();
-                    $('#divdispensing').hide();
-                });
-                $('.hdoil').click(function(){
-                    $('#divclient').hide();
-                    $('#divoil').toggle();
-                    $('#divowner').hide();
-                    $('#divdispensing').hide();
-                });
-                $('.hdowner').click(function(){
+    function myFunction(param) {
+  var x = document.getElementById(param);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
 
-                    $('#divclient').hide();
-                    $('#divoil').hide();
-                    $('#divowner').toggle();
-                    $('#divdispensing').hide();
-                });
-                $('.hddispensing').click(function(){
-                    $('#divclient').hide();
-                    $('#divoil').hide();
-                    $('#divowner').hide();
-                    $('#divdispensing').toggle();
-                });
+function on() {
+  document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+  document.getElementById("overlay").style.display = "none";
+}
+
 </script>
     <script>
 
