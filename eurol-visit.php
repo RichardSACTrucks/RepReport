@@ -315,76 +315,30 @@ None
 </div>
 
         <div class="container">
-<button type="button" class="owner" id="owner" onclick="myFunction('divclient')"><h1 id="owner">Eurol Clients</h1></button>
+<button type="button" class="owner" id="owner" onclick="myFunction('divclient')"><h1 id="owner">Eurol Trucks</h1></button>
 <div id="divclient" style="display: none;">
+<!-- FORM POSTING -->
             <form action="" method="post">
-<!-- TRUCK BRANDS -->
-<?php
-                            function vehQty($cpynr, $vehnr){
-                                $sql = "SELECT veh_qty FROM clients_vehicles WHERE clients_main_id=? AND veh_code=? LIMIT 1;";
-                            }
-?>
                 <label class="form-label"><b>Truck Brands</b></label>
-                <p><input type="number" id="vehm01" name="vehm01" value="<?php vehQty($cpyid,"1"); ?>" min="0" max="9999" maxlength="4" size="4"> Volvo</p>
-                        <p><input type="number" id="vehm02" name="vehm02" value="<?php vehQty($cpyid,"2"); ?>" min="0" max="9999" maxlength="4" size="4"> Scania</p>
-                        <p><input type="number" id="vehm03" name="vehm03" value="<?php vehQty($cpyid,"3"); ?>" min="0" max="9999" maxlength="4" size="4"> Mercedes</p>
-                        <p><input type="number" id="vehm04" name="vehm04" value="<?php vehQty($cpyid,"4"); ?>" min="0" max="9999" maxlength="4" size="4"> MAN</p>
-                        <p><input type="number" id="vehm06" name="vehm06" value="<?php vehQty($cpyid,"6"); ?>" min="0" max="9999" maxlength="4" size="4"> DAF</p>
-                        <p><input type="number" id="vehm20" name="vehm20" value="<?php vehQty($cpyid,"20"); ?>" min="0" max="9999" maxlength="4" size="4"> BPW</p>
-                        <p><input type="number" id="vehm22" name="vehm22" value="<?php vehQty($cpyid,"22"); ?>" min="0" max="9999" maxlength="4" size="4"> Henred</p>
-                        <p><input type="number" id="vehm30" name="vehm30" value="<?php vehQty($cpyid,"30"); ?>" min="0" max="9999" maxlength="4" size="4"> Afrit</p>
-                        <p><input type="number" id="vehm82" name="vehm82" value="<?php vehQty($cpyid,"82"); ?>" min="0" max="9999" maxlength="4" size="4"> Isuzu MCV</p>
-                        <p><input type="number" id="vehm80" name="vehm80" value="<?php vehQty($cpyid,"80"); ?>" min="0" max="9999" maxlength="4" size="4"> Hino</p>
-                        <p><input type="number" id="vehm81" name="vehm81" value="<?php vehQty($cpyid,"81"); ?>" min="0" max="9999" maxlength="4" size="4"> UD</p>
-                        <p><input type="number" id="vehm60" name="vehm60" value="<?php vehQty($cpyid,"60"); ?>" min="0" max="9999" maxlength="4" size="4"> Toyota</p>
-                        <p><input type="number" id="vehm61" name="vehm61" value="<?php vehQty($cpyid,"61"); ?>" min="0" max="9999" maxlength="4" size="4"> Ford</p>
-                        <p><input type="number" id="vehm63" name="vehm63" value="<?php vehQty($cpyid,"63"); ?>" min="0" max="9999" maxlength="4" size="4"> Isuzu LCV</p>
-                        <p><input type="number" id="vehm64" name="vehm64" value="<?php vehQty($cpyid,"64"); ?>" min="0" max="9999" maxlength="4" size="4"> Nissan</p>
-                        <p><input type="number" id="vehm71" name="vehm71" value="<?php vehQty($cpyid,"71"); ?>" min="0" max="9999" maxlength="4" size="4"> Mazda</p>
-                        <p><input type="number" id="vehm11" name="vehm11" value="<?php vehQty($cpyid,"11"); ?>" min="0" max="9999" maxlength="4" size="4"> Sprinter</p>
+                        <p><input type="number" id="vehm01" name="vehm01" value="<?php vehQty('Volvo',$vehnr); ?>" min="0" max="9999" maxlength="4" value="<?php echo $vehnr?>" size="4"> Volvo</p>
+                        <p><input type="number" id="vehm02" name="vehm02" value="<?php vehQty('Scania',$vehnr); ?>" min="0" max="9999" maxlength="4" value="<?php echo $vehnr?>" size="4"> Scania</p>
+                        <p><input type="number" id="vehm03" name="vehm03" value="<?php vehQty('Mercedes',$vehnr); ?>" min="0" max="9999" maxlength="4" value="<?php echo $vehnr?>" size="4"> Mercedes</p>
+                        <p><input type="number" id="vehm04" name="vehm04" value="<?php vehQty('MAN',$vehnr); ?>" min="0" max="9999" maxlength="4" value="<?php echo $vehnr?>" size="4"> MAN</p>
+                        <p><input type="number" id="vehm06" name="vehm06" value="<?php vehQty('DAF',$vehnr); ?>" min="0" max="9999" maxlength="4" value="<?php echo $vehnr?>" size="4"> DAF</p>
+                        <p><input type="number" id="vehm20" name="vehm20" value="<?php vehQty('BPW',$vehnr); ?>" min="0" max="9999" maxlength="4" value="<?php echo $vehnr?>" size="4"> BPW</p>
+                        <p><input type="number" id="vehm22" name="vehm22" value="<?php vehQty('Henred',$vehnr); ?>" min="0" max="9999" maxlength="4" value="<?php echo $vehnr?>" size="4"> Henred</p>
+                        <p><input type="number" id="vehm30" name="vehm30" value="<?php vehQty('Afrit',$vehnr); ?>" min="0" max="9999" maxlength="4" value="<?php echo $vehnr?>" size="4"> Afrit</p>
+                        <p><input type="number" id="vehm82" name="vehm82" value="<?php vehQty('Isuzu MCV',$vehnr); ?>" min="0" max="9999" maxlength="4" value="<?php echo $vehnr?>" size="4"> Isuzu MCV</p>
+                        <p><input type="number" id="vehm80" name="vehm80" value="<?php vehQty('Hino',$vehnr); ?>" min="0" max="9999" maxlength="4" value="<?php echo $vehnr?>" size="4"> Hino</p>
+                        <p><input type="number" id="vehm81" name="vehm81" value="<?php vehQty('UD',$vehnr); ?>" min="0" max="9999" maxlength="4" value="<?php echo $vehnr?>" size="4"> UD</p>
+                        <p><input type="number" id="vehm60" name="vehm60" value="<?php vehQty('Toyota',$vehnr); ?>" min="0" max="9999" maxlength="4" value="<?php echo $vehnr?>" size="4"> Toyota</p>
+                        <p><input type="number" id="vehm61" name="vehm61" value="<?php vehQty('Ford',$vehnr); ?>" min="0" max="9999" maxlength="4" value="<?php echo $vehnr?>" size="4"> Ford</p>
+                        <p><input type="number" id="vehm63" name="vehm63" value="<?php vehQty('Isuzu LCV',$vehnr); ?>" min="0" max="9999" maxlength="4" value="<?php echo $vehnr?>" size="4"> Isuzu LCV</p>
+                        <p><input type="number" id="vehm64" name="vehm64" value="<?php vehQty('Nissan',$vehnr); ?>" min="0" max="9999" maxlength="4" value="<?php echo $vehnr?>" size="4"> Nissan</p>
+                        <p><input type="number" id="vehm71" name="vehm71" value="<?php vehQty('Mazda',$vehnr); ?>" min="0" max="9999" maxlength="4" value="<?php echo $vehnr?>" size="4"> Mazda</p>
+                        <p><input type="number" id="vehm11" name="vehm11" value="<?php vehQty('Sprinter',$vehnr); ?>" min="0" max="9999" maxlength="4" value="<?php echo $vehnr?>" size="4"> Sprinter</p>
                 <div id="result" ></div>
                 <hr>
-                <label for="radioForm2" class="form-label"><b>Volume Of Lubricants (Per Month)</b></label>
-
-                <div class="form-check">
-
-                    <div class="radio-inline">
-
-                        <label class="radio-inline" for="volumeRadios1">
-                            <input class="form-check-input" type="radio" name="luberadio[]" id="volumeRadios1"
-                                value="0-100 L" checked> 0-100 L
-                        </label>
-                        <br>
-
-                        <label class="radio-inline" for="volumeRadios2">
-                            <input class="form-check-input" type="radio" name="luberadio[]" id="volumeRadios2"
-                                value="101-1k L"> 101-1k L
-                        </label>
-                        <br>
-
-                        <label class="radio-inline" for="volumeRadios3">
-                            <input class="form-check-input" type="radio" name="luberadio[]" id="volumeRadios3"
-                                value="1k - 5k L">1k - 5k L
-                        </label>
-                        <br>
-
-                        <label class="radio-inline" for="volumeRadios4">
-                            <input class="form-check-input" type="radio" name="luberadio[]" id="volumeRadios4"
-                                value="5k - 10k L"> 5k - 10k L
-                        </label>
-                        <br>
-
-                        <label class="radio-inline" for="volumeRadios5">
-                            <input class="form-check-input" type="radio" name="luberadio[]" id="volumeRadios5"
-                                value="10k L+"> 10k L+
-                        </label>
-                        
-                    </div>
-
-                </div>
-                <hr>
-                <input type="file" accept="images/*" capture="camera" name="files[]" multiple="multiple">
-                    <hr>
                 <input type="submit" name="Submit" class="close" onClick='window.self.close()' value="Save">
                 <hr>
             <hr>
@@ -417,36 +371,76 @@ None
                     <input list="browsers" name='hydralics-brand[]' class="form-control" id="hydralics" rows="3">
                 </div>
                 <datalist id="browsers">
-                    <option value="Fuchs">
-                    <option value="Castrol">
-                    <option value="Caltex">
-                    <option value="Shell">
-                    <option value="Castrol">
-                    <option value="Total">
-                    <option value="Petronas">
-                    <option value="Engen">
-                    <option value="Sasol">
-                    <option value="Volvo">
-                    <option value="Mercedes Benz">
-                    <option value="Q8">
-                    <option value="Motul">
-                    <option value="Elf">
-                    <option value="Valvoline">
-                    <option value="Liquimoly">
-                    <option value="Addinol">
-                    <option value="Petromark">
-                    <option value="Wolf">
-                    <option value="C.I.M">
-                    <option value="Viscol">
-                    <option value="BPW">
-                    <option value="Evron">
-                    <option value="Fuelex Oil">
-                    <option value="Indy Oil">
-                    <option value="Puma">
-                    <option value="Desamark">
-                    <option value="KZN Oils">
-                    <option value="Spanjaard">
+                    <option value="Fuchs,">
+                    <option value="Castrol,">
+                    <option value="Caltex,">
+                    <option value="Shell,">
+                    <option value="Castrol,">
+                    <option value="Total,">
+                    <option value="Petronas,">
+                    <option value="Engen,">
+                    <option value="Sasol,">
+                    <option value="Volvo,">
+                    <option value="Mercedes Benz,">
+                    <option value="Q8,">
+                    <option value="Motul,">
+                    <option value="Elf,">
+                    <option value="Valvoline,">
+                    <option value="Liquimoly,">
+                    <option value="Addinol,">
+                    <option value="Petromark,">
+                    <option value="Wolf,">
+                    <option value="C.I.M,">
+                    <option value="Viscol,">
+                    <option value="BPW,">
+                    <option value="Evron,">
+                    <option value="Fuelex Oil,">
+                    <option value="Indy Oil,">
+                    <option value="Puma,">
+                    <option value="Desamark,">
+                    <option value="KZN Oils,">
+                    <option value="Spanjaard,">
                 </datalist>
+                <hr>
+                <label for="radioForm2" class="form-label"><b>Volume Of Lubricants (Per Month)</b></label>
+<div class="form-check">
+
+    <div class="radio-inline">
+        <label class="radio-inline" for="volumeRadios1">
+            <input class="form-check-input" type="radio" name="luberadio[]" id="volumeRadios1"
+                value="0-100 L" checked> 0-100 L
+        </label>
+        <br>
+
+        <label class="radio-inline" for="volumeRadios2">
+            <input class="form-check-input" type="radio" name="luberadio[]" id="volumeRadios2"
+                value="101-1k L"> 101-1k L
+        </label>
+        <br>
+
+        <label class="radio-inline" for="volumeRadios3">
+            <input class="form-check-input" type="radio" name="luberadio[]" id="volumeRadios3"
+                value="1k - 5k L">1k - 5k L
+        </label>
+        <br>
+
+        <label class="radio-inline" for="volumeRadios4">
+            <input class="form-check-input" type="radio" name="luberadio[]" id="volumeRadios4"
+                value="5k - 10k L"> 5k - 10k L
+        </label>
+        <br>
+
+        <label class="radio-inline" for="volumeRadios5">
+            <input class="form-check-input" type="radio" name="luberadio[]" id="volumeRadios5"
+                value="10k L+"> 10k L+
+        </label>
+        
+    </div>
+
+</div>
+<hr>
+<input type="file" accept="images/*" capture="camera" name="files[]" multiple="multiple">
+    <hr>
                 <hr>
                 <!-- PACK SIZE -->
                 <label for="radioForm2" class="form-label"><b>Pack Size Preference</b></label>
@@ -634,6 +628,14 @@ None
 <!--                                                        PHP SCRIPT                                                            -->
 <!-- ============================================================================================================================ -->
     <?php
+
+function vehQty($cpynr, $vehnr){
+    $array = [];
+    array_push($array,$cpynr+"="+$vehnr);
+    return $array;
+}
+
+
 // POST
         if ($_SERVER["REQUEST_METHOD"] == "POST")
         {
@@ -643,17 +645,13 @@ None
 // CUSTOMER NAME
                 if(empty($_POST["customer"]))
                 {
-                    echo "name fail";
-                }
-                else
-                {
                     $client_name = ($_POST["customer"]);
 
                     // echo "<br>Client Name: " .$client_name;
 // TRUCK TYPE(ARRAY)
-                    if(empty($_POST["subject"]))
+                    if(empty(vehQty($cpynr, $vehnr)))
                     {
-                        echo "<br>truck selection failed ";
+                        echo vehQty($cpynr, $vehnr);
                     }
                     else
                     {
@@ -663,19 +661,11 @@ None
 // NUM OF TRUCKS
                         if(empty($_POST["num_of_trucks"]))
                         {
-                            echo "<br>num of trucks fails";
-                        }
-                        else
-                        {
                             $num_of_trucks = ($_POST["num_of_trucks"]); 
 
                             // echo "<br>Number Of Trucks :" .$num_of_trucks;
 // MAIN TRUCKS
                             if(empty($_POST["maintruckbrands"]))
-                            {
-                                echo "<br>failed main truck brands";
-                            }
-                            else
                             {
                                 $main_trucks = ($_POST["maintruckbrands"]); 
 
