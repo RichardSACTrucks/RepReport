@@ -614,7 +614,7 @@ None
             </form>
 
             <!-- LOGOUT -->
-            <form action="https://sacmarketing.co.za/rep/home.php" method="POST">
+            <form action="https://sacmarketing.co.za/rep/home.php"  method="POST">
                 <button 
                 type="submit" 
                 name="submit" 
@@ -630,6 +630,269 @@ None
     </body>
 
     </html>
+<!-- ============================================================================================================================ -->
+<!--                                                        PHP SCRIPT                                                            -->
+<!-- ============================================================================================================================ -->
+    <?php
+// POST
+        if ($_SERVER["REQUEST_METHOD"] == "POST")
+        {
+            // BUTTON CLICKED
+            if(empty($_POST["Save"]))
+            {
+// CUSTOMER NAME
+                if(empty($_POST["customer"]))
+                {
+                    echo "name fail";
+                }
+                else
+                {
+                    $client_name = ($_POST["customer"]);
+
+                    // echo "<br>Client Name: " .$client_name;
+// TRUCK TYPE(ARRAY)
+                    if(empty($_POST["subject"]))
+                    {
+                        echo "<br>truck selection failed ";
+                    }
+                    else
+                    {
+                        $truck_type = ($_POST["subject"]);
+
+                        // echo "<br>Truck Brands :" .$truck_type;
+// NUM OF TRUCKS
+                        if(empty($_POST["num_of_trucks"]))
+                        {
+                            echo "<br>num of trucks fails";
+                        }
+                        else
+                        {
+                            $num_of_trucks = ($_POST["num_of_trucks"]); 
+
+                            // echo "<br>Number Of Trucks :" .$num_of_trucks;
+// MAIN TRUCKS
+                            if(empty($_POST["maintruckbrands"]))
+                            {
+                                echo "<br>failed main truck brands";
+                            }
+                            else
+                            {
+                                $main_trucks = ($_POST["maintruckbrands"]); 
+
+                                // echo "<br>Main Truck Brands : " .$main_trucks;
+// VOLUME OF LUBE
+                                if(empty($_POST["luberadio"]))
+                                {          
+                                    echo "<br>failed echo $luberadio;";    
+                                }
+                                else
+                                {
+                                    $luberadio = ($_POST["luberadio"]);    
+
+                                    // echo "<br>Lube Per Month :" .$luberadio;
+// grease-coolant-gear oil
+                                    if(empty($_POST["grease-coolant-gearoil"]))
+                                    {  
+                                        echo "<br>failed grease-coolant-gearoil";    
+                                    }
+                                    else
+                                    {
+
+                                        $grease = ($_POST["grease-coolant-gearoil"]); 
+
+                                        // echo "<br>grease-coolant-gearoil :" .$grease;
+// LUBE BRAND
+                                        if(empty($_POST["lubricant-brand"]))
+                                        { 
+                                            echo "<br>failed lubricant-brand";                      
+                                        }
+                                        else
+                                        {
+                                            $lubricant_brand = ($_POST["lubricant-brand"]); 
+
+                                            // echo "<br>lubricant-brand :" .$lubricant_brand;      
+// CHANGE INTERVAL
+                                            if(empty($_POST["changeinterval"]))
+                                            { 
+                                                echo "<br>failed change interval";                      
+                                            }
+                                            else
+                                            {
+                                                $changeinterval = ($_POST["changeinterval"]); 
+
+                                                // echo "<br>changeinterval :" .$changeinterval;  
+// PACK SIZE
+                                                if(empty($_POST["packradio"]))
+                                                { 
+                                                    echo "<br>failed change packradio";                      
+                                                }
+                                                else
+                                                {
+                                                    $packradio = ($_POST["packradio"]); 
+                                                    $otherpack = ($_POST["otherpack"]); 
+
+                                                    // echo "<br>packradio :" .$packradio;
+// contract
+                                                    $contract = ($_POST["contract"]); 
+
+                                                    // echo "<br>contract :" .$contract ;                                                     
+// lubrication_dispensing_type
+                                                    if(empty($_POST["lubrication_dispensing_type"]))
+                                                    { 
+                                                        echo "<br>failed lubrication_dispensing_type";                      
+                                                    }
+                                                    else
+                                                    {
+                                                        $lubrication_dispensing_type = ($_POST["lubrication_dispensing_type"]); 
+
+                                                        // echo "<br>lubrication_dispensing_type :" .$lubrication_dispensing_type ;  
+// maintenance
+                                                        $maintenance = ($_POST["maintenance"]); 
+
+                                                        // echo "<br>maintenance :" .$maintenance ;  
+// owner
+                                                        if(empty($_POST["owner"]))
+                                                        { 
+                                                            echo "<br>failed owner";                      
+                                                        }
+                                                        else
+                                                        {
+                                                            $owner = ($_POST["owner"]); 
+
+                                                            // echo "<br>owner :" .$owner ; 
+// contact_name
+                                                            if(empty($_POST["contact_name"]))
+                                                            { 
+                                                                echo "<br>failed contact_name";                      
+                                                            }
+                                                            else
+                                                            {
+                                                                $contact_name = ($_POST["contact_name"]); 
+
+                                                                // echo "<br>contact_name :" .$contact_name ; 
+// oil_name
+                                                                if(empty($_POST["oil_name"]))
+                                                                { 
+                                                                    echo "<br>failed oil_name";                      
+                                                                }
+                                                                else
+                                                                {
+                                                                    $oil_name = ($_POST["oil_name"]); 
+
+                                                                    // echo "<br>oil_name :" .$oil_name ; 
+// gear_oil_name
+                                                                    if(empty($_POST["gear_oil_name"]))
+                                                                    { 
+                                                                        echo "<br>failed gear_oil_name";                      
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        $gear_oil_name = ($_POST["gear_oil_name"]); 
+
+                                                                        // echo "<br>gear_oil_name :" .$gear_oil_name ; 
+// coolant_name
+                                                                        if(empty($_POST["coolant_name"]))
+                                                                        { 
+                                                                            echo "<br>failed coolant_name";                      
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            $coolant_name = ($_POST["coolant_name"]); 
+
+                                                                            // echo "<br>coolant_name :" .$coolant_name ; 
+// actionradio
+                                                                            if(empty($_POST["actionradio"]))
+                                                                            { 
+                                                                                echo "<br>failed actionradio";                      
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                $actionradio = ($_POST["actionradio"]); 
+
+                                                                                // echo "<br>actionradio :" .$actionradio ; 
+// INSERT INTO TABLE
+
+                        // IMPLODE TRUCK BRAND MULTI SELECT ARRAY
+                        $truck_type_multi = implode( ',' , $truck_type);
+
+                        //INSERT DATA INTO DELIVERY TABLE
+                        $insert_visit = "INSERT INTO
+                        clients_repvisits_eurol
+                        (   
+                            client_name,
+                            truck_brands,
+                            num_of_trucks,
+                            main_truck_brands,
+                            volume_of_lube,
+                            grease_coolant_gear_brands,
+                            lube_brand_names,
+                            current_change_intervals,
+                            pack_size_pref,
+                            pack_size_pref_other,
+                            contract,
+                            lube_dispense_type,
+                            maintenance_plan,
+                            owner_name,
+                            contact_name,
+                            engine_oil_product_name,
+                            gear_oil_product_name,
+                            coolant_product_name,
+                            actions_taken
+                        )
+                        values
+                        (
+                            '$client_name'                ,
+                            '$truck_type_multi'           ,
+                            '$num_of_trucks'              ,
+                            '$main_trucks'                ,
+                            '$luberadio'                  ,
+                            '$grease'                     ,
+                            '$lubricant_brand'            ,
+                            '$changeinterval'             ,
+                            '$packradio'                  ,
+                            '$otherpack'                  ,
+                            '$contract'                   ,
+                            '$lubrication_dispensing_type',
+                            '$maintenance'                ,
+                            '$owner'                      ,
+                            '$contact_name'               ,
+                            '$oil_name'                   ,
+                            '$gear_oil_name'              ,
+                            '$coolant_name '              ,
+                            '$actionradio  '
+                        )";
+
+                        if($dbcon->query($insert_visit) === true)
+                        {       
+                            // PROMPTS THE USER WHEN DATA SAVED SUCCESFULLY                             
+                            echo "<br> Visit Added Successfully"; 
+
+                        }
+                        else
+                        {
+                            echo("Error description: "    . $dbcon               -> error);
+                            echo "Failed To Load Invoice" . mysqli_connect_error(        );
+                        }   
+
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }  
+                                                        } 
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }                           
+                            }
+                        }
+                    }
+                }              
+            }
+        }
+    ?>
 
 <!-- ============================================================================================================================ -->
 <!--                                                        SCRIPT                                                                -->
