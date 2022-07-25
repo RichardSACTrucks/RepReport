@@ -159,7 +159,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(226,226,226,0.6);
             z-index: 2;
             cursor: pointer;
         }
@@ -209,9 +209,9 @@
         .container 
         {
             bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(226, 226, 226, 0.6);
             backdrop-filter: blur(8px);
-            color: #f1f1f1;
+            color: #000000;
             width: 100%;
             height: 100%;
             padding: 2%;
@@ -258,6 +258,7 @@
         .close{
             width: 100% !important;
         }
+        
         </style>
     </head>
 
@@ -315,7 +316,7 @@ None
 </div>
 
         <div class="container">
-<button type="button" class="owner" id="owner" onclick="myFunction('divclient')"><h1 id="owner">Eurol Trucks</h1></button>
+<button type="button" class="hdowner" id="hdowner" onclick="myFunction('divclient')"><h1 id="hdowner">Eurol Trucks</h1></button>
 <div id="divclient" style="display: none;">
 <!-- FORM POSTING -->
             <form action="" method="post">
@@ -339,7 +340,7 @@ None
                         <p><input type="number" id="vehm11" name="vehm11" value="<?php vehQty('Sprinter',$vehnr); ?>" min="0" max="9999" maxlength="4" value="<?php echo $vehnr?>" size="4"> Sprinter</p>
                 <div id="result" ></div>
                 <hr>
-                <input type="submit" name="Submit" class="close" onClick='window.self.close()' value="Save">
+                <input type="button" name="Submit" class="hdownersave" onClick="highlight('hdownersave')" value="Save">
                 <hr>
             <hr>
 </div>
@@ -517,7 +518,7 @@ None
                     </div>
                 </div>
                 <hr>
-                <input type="submit" name="Submit" class="close" value="Save">
+                <input type="button" name="Submit" class="hdoilsave" onClick="highlight('hdoilsave')" value="Save">
                 <hr>
 </div>
 <button type="button" class="hdclient" id="hdclient" onclick="myFunction('divowner')"><h1 id="hdclient">Eurol Owners</h1></button>
@@ -544,7 +545,7 @@ None
                     <input name='Mechanic-brand' class="form-control" id="Mechanic" rows="3" placeholder="Email">
                 </div>
                 <hr>
-                <input type="submit" name="Submit" class="close" onClick='window.self.close()' value="Save">
+                <input type="button" name="Submit" class="hdclientsave" onClick="highlight('hdclientsave')"  value="Save">
                 <hr>
 </div>
 <button type="button" class="hddispensing" id="hddispensing" onclick="myFunction('divdispensing')"><h1 id="hddispensing">Eurol Dispensing Lubricants</h1></button>
@@ -592,7 +593,7 @@ None
                         </div>
                     </div>
                 <hr>
-                <input type="submit" name="Submit" class="close" onClick='window.self.close()' value="Save">
+                <input type="button" name="Submit" class="hddispensingsave" onClick="highlight('hddispensingsave')" value="Save">
                 <hr>
 </div>
  <!-- ACTIONS TAKEN -->
@@ -622,7 +623,6 @@ None
         <p><a href="https://sacmarketing.co.za/rep">Log Out</a></p>
 
     </body>
-
     </html>
 <!-- ============================================================================================================================ -->
 <!--                                                        PHP SCRIPT                                                            -->
@@ -634,6 +634,7 @@ function vehQty($cpynr, $vehnr){
     array_push($array,$cpynr+"="+$vehnr);
     return $array;
 }
+
 
 
 // POST
@@ -897,6 +898,24 @@ function vehQty($cpynr, $vehnr){
   }
 }
 
+function highlight(param){
+    var val = param.substring(0,param.length - 4);
+    var content = document.getElementById(val);
+    content.style.color = 'green';
+    if (val.indexOf('hd')){
+        val.replace('hd', 'div');
+        content = document.getElementById(val);
+        content.style.display = "none";
+        content.style.backgroundColor  = "green|transparent";
+        
+    }else{
+        val = "div"+val;
+        content = document.getElementById(val);
+        content.style.display = "none";
+        content.style.backgroundColor  = "green|transparent";
+    }
+}
+
 function on() {
   document.getElementById("overlay").style.display = "block";
 }
@@ -904,6 +923,7 @@ function on() {
 function off() {
   document.getElementById("overlay").style.display = "none";
 }
+
 
 </script>
     <script>
